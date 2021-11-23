@@ -1,0 +1,14 @@
+---
+#- 
+#  role_name: 厂区用户
+#  level: 1
+#- 
+#  role_name: 集团用户
+#  level: 1
+#- 
+#  role_name: 仓库管理 
+#  level: 1
+#  permissions: 
+#    -
+#      controller: water_items_controller
+#      actions: [index, new, create, edit, update, show, destroy, update_count, xls_download, parse_excel, query_all]
