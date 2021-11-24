@@ -7,7 +7,7 @@ class PapersController < ApplicationController
   def index
     @paper = Paper.new
    
-    #@papers = current_user.papers.page( params[:page]).per( Setting.systems.per_page )
+    @papers = Paper.all.page( params[:page]).per( Setting.systems.per_page )
    
   end
    
@@ -23,7 +23,25 @@ class PapersController < ApplicationController
        
         :name => item.name,
        
-        :exmdate => item.exmdate,
+        :start_time => item.start_time,
+       
+        :end_time => item.end_time,
+       
+        :single => item.single,
+       
+        :single_score => item.single_score,
+       
+        :mcq => item.mcq,
+       
+        :mcq_score => item.mcq_score,
+       
+        :tof => item.tof,
+       
+        :tof_score => item.tof_score,
+       
+        :qaa => item.qaa,
+       
+        :qaa_score => item.qaa_score,
        
         :desc => item.desc
       
@@ -39,7 +57,7 @@ class PapersController < ApplicationController
    
   def show
    
-    @paper = Paper.where(:user => current_user, :id => iddecode(params[:id])).first
+    @paper = Paper.find(iddecode(params[:id]))
    
   end
    
@@ -55,8 +73,6 @@ class PapersController < ApplicationController
   def create
     @paper = Paper.new(paper_params)
      
-    @paper.user = current_user
-     
     if @paper.save
       redirect_to :action => :index
     else
@@ -68,7 +84,7 @@ class PapersController < ApplicationController
    
   def edit
    
-    @paper = Paper.where(:user => current_user, :id => iddecode(params[:id])).first
+    @paper = Paper.find(iddecode(params[:id]))
    
   end
    
@@ -76,7 +92,7 @@ class PapersController < ApplicationController
    
   def update
    
-    @paper = Paper.where(:user => current_user, :id => iddecode(params[:id])).first
+    @paper = Paper.find(iddecode(params[:id]))
    
     if @paper.update(paper_params)
       redirect_to paper_path(idencode(@paper.id)) 
@@ -89,28 +105,32 @@ class PapersController < ApplicationController
    
   def destroy
    
-    @paper = Paper.where(:user => current_user, :id => iddecode(params[:id])).first
+    @paper = Paper.find(iddecode(params[:id]))
    
     @paper.destroy
     redirect_to :action => :index
   end
    
 
-  
+   def download_paper
+     @paper = Paper.find(iddecode(params[:id]))
+
+     docWorker = ExportPaperDoc.new    
+     target_word = docWorker.process(@paper.id)
+     send_file target_word, :filename => @paper.name + ".docx", :type => "application/force-download", :x_sendfile=>true
+   end
 
   
 
   
-  def xls_download
-    send_file File.join(Rails.root, "templates", "表格模板.xlsx"), :filename => "表格模板.xlsx", :type => "application/force-download", :x_sendfile=>true
-  end
+
   
   
   
 
   private
     def paper_params
-      params.require(:paper).permit( :name, :exmdate, :desc)
+      params.require(:paper).permit( :name, :start_time, :end_time, :single, :single_score, :mcq, :mcq_score, :tof, :tof_score, :qaa, :qaa_score, :desc)
     end
   
   

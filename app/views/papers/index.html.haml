@@ -8,14 +8,6 @@
       - content_for :card_header do
         %h5
           = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
-
-          
-          = link_to xls_download_papers_path, :class => "button button-royal pull-right button-small mr-1" do
-            下载表格模板
-          
-
-          
-
           -#
             = link_to "/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
               = fa_icon "plus", text: Setting.systems.btn_new, right: false 
@@ -36,14 +28,37 @@
                     %th{:scope => "col", :'data-field' => "name"}
                       = Setting.papers.name
                   
-                    %th{:scope => "col", :'data-field' => "exmdate"}
-                      = Setting.papers.exmdate
+                    %th{:scope => "col", :'data-field' => "start_time"}
+                      = Setting.papers.start_time
                   
-                    %th{:scope => "col", :'data-field' => "desc"}
-                      = Setting.papers.desc
+                    %th{:scope => "col", :'data-field' => "end_time"}
+                      = Setting.papers.end_time
+                  
+                    %th{:scope => "col", :'data-field' => "single"}
+                      = Setting.papers.single
+                  
+                    %th{:scope => "col", :'data-field' => "single_score"}
+                      = Setting.papers.single_score
+                  
+                    %th{:scope => "col", :'data-field' => "mcq"}
+                      = Setting.papers.mcq
+                  
+                    %th{:scope => "col", :'data-field' => "mcq_score"}
+                      = Setting.papers.mcq_score
+                  
+                    %th{:scope => "col", :'data-field' => "tof"}
+                      = Setting.papers.tof
+                  
+                    %th{:scope => "col", :'data-field' => "tof_score"}
+                      = Setting.papers.tof_score
+                  
+                    %th{:scope => "col", :'data-field' => "qaa"}
+                      = Setting.papers.qaa
+                  
+                    %th{:scope => "col", :'data-field' => "qaa_score"}
+                      = Setting.papers.qaa_score
                   
                     %th{:scope => "col", :'data-field' => "button"}
-              -#
                 %tbody
                   - @papers.each_with_index do |paper, index|
                     %tr
@@ -53,16 +68,33 @@
                       %td
                         = paper.name
                       %td
-                        = paper.exmdate
+                        = paper.start_time.strftime("%Y-%m-%d %H:%M")
                       %td
-                        = paper.desc
+                        = paper.end_time.strftime("%Y-%m-%d %H:%M")
+                      %td
+                        = paper.single
+                      %td
+                        = paper.single_score
+                      %td
+                        = paper.mcq
+                      %td
+                        = paper.mcq_score
+                      %td
+                        = paper.tof
+                      %td
+                        = paper.tof_score
+                      %td
+                        = paper.qaa
+                      %td
+                        = paper.qaa_score
                       %td
                         .container-fluid
                           .row.justify-content-center
                             = link_to "编辑", edit_paper_path(idencode(paper.id)), :class => "button button-royal button-small mr-1" 
-                            = link_to "查看",  paper_path(idencode(paper.id)), :class => "button button-primary button-small mr-1" 
+                            = link_to "组卷", download_paper_paper_path(idencode(paper.id)), :class => "button button-primary button-small mr-1" 
+                            -#
+                              = link_to "查看",  paper_path(idencode(paper.id)), :class => "button button-primary button-small mr-1" 
                             = link_to "删除",  paper_path(idencode(paper.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
-            -#
               .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
                 = paginate @papers, window: 2, left: 1, right: 1 
       = render "layouts/bootstrap/card"

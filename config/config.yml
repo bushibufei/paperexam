@@ -472,8 +472,19 @@ development:
   papers:
     label: 试卷
     name: 试卷名
-    exmdate: 考试时间
+    start_time: 考试开始时间
+    end_time: 考试结束时间
+    single: 单选题数量
+    single_score: 单选题分值
+    mcq: 多选题数量
+    mcq_score: 多选题分值
+    tof: 判断题数量
+    tof_score: 判断题分值
+    qaa: 问答题数量
+    qaa_score: 问答题分值
     desc: 备注
+    right: '对'
+    error: '错'
   singles:
     label: 单选题
     title: 题目
