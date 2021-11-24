@@ -1,5 +1,3 @@
-require "sablon"
-
 #不用异步
 class ExportPaperDoc
 
@@ -40,17 +38,17 @@ class ExportPaperDoc
       order += 1
       @singles = Single.all.sample(single)
       header = order.to_s + '单项选择题(每题' + single_score + '分)' 
-      docx.p header 
-      answers += '\r\n' +  header + '\r\n'
+      docx.h4 header 
+      answers += header + '#$#'
 
       @singles.each_with_index do |sg, index|
         key = index+1
         key = key.to_s
         docx.p key + ' ' + sg.title
-        options = sg.single_options
+        options = sg.single_options.shuffle
         options.each_with_index do |opt, ind|
           docx.p tag[ind] + " " + opt.title
-          answers += key + tag[ind] if opt.answer
+          answers += key + tag[ind] + ',  ' if opt.answer
         end
       end
     end
@@ -59,20 +57,20 @@ class ExportPaperDoc
       order += 1
       @mcqs = Mcq.all.sample(qaa)
       header = order.to_s + '多项选择题(每题' + mcq_score + '分)'
-      docx.p header 
-      answers += '\r\n' +  header + '\r\n'
+      docx.h4 header 
+      answers += '#$#' + header + '#$#'
 
       @mcqs.each_with_index do |mcq, index|
         key = index+1
         key = key.to_s
         docx.p key + ' ' + mcq.title
-        options = mcq.mcq_options
+        options = mcq.mcq_options.shuffle
         answer_cache = ''
         options.each_with_index do |opt, ind|
           docx.p tag[ind] + " " + opt.title
           answer_cache += tag[ind] if opt.answer
         end
-        answers += key + answer_cache
+        answers += key + answer_cache + ',  '
       end
     end
 
@@ -80,8 +78,8 @@ class ExportPaperDoc
       order += 1
       @tofs = Tof.all.sample(tof)
       header = order.to_s + '判断题(每题' + tof_score + '分)'
-      docx.p header 
-      answers += '\r\n' + header + '\r\n'
+      docx.h4 header 
+      answers += '#$#' + header + '#$#'
 
       @tofs.each_with_index do |tof, index|
         key = index+1
@@ -89,9 +87,9 @@ class ExportPaperDoc
         docx.p key + ' ' + tof.title
 
         if tof.answer
-          answers += key + Setting.papers.right 
+          answers += key + Setting.papers.right + ',  ' 
         else
-          answers += key + Setting.papers.error
+          answers += key + Setting.papers.error + ',  '
         end
       end
     end
@@ -100,20 +98,23 @@ class ExportPaperDoc
       order += 1
       @qaas = Qaa.all.sample(qaa)
       header = order.to_s + '问答题(每题' + qaa_score + '分)'
-      docx.p header 
-      answers += '\r\n' + header + '\r\n'
+      docx.h4 header 
+      answers += '#$#' + header + '#$#'
 
       @qaas.each_with_index do |qaa, index|
         key = index+1
         key = key.to_s
         docx.p key + ' ' + qaa.title
 
-        answers += key + qaa.answer 
+        answers += '[第' + key + '题] ' + qaa.answer + '#$#'
       end
     end
 
     docx.page
-    docx.p answers
+    docx.h4 '试题答案'
+    answers.split('#$#').each do |ans|
+      docx.p ans
+    end
 
     docx.save
 
@@ -144,7 +145,6 @@ class ExportPaperDoc
       size 32
       bold true
       italic false
-      indent_left 340
     end
     docx.style do
       id "p"
