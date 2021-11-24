@@ -481,6 +481,21 @@ development:
     label: 单选选项
     title: 选项内容
     answer: 答案
+  mcqs:
+    label: 多选题
+    title: 标题
+  mcq_options:
+    label: 多选题选项
+    title: 标题
+    answer: 答案
+  tofs:
+    label: 判断题
+    title: 标题
+    answer: 答案
+  qaas:
+    label: 问答题
+    title: 标题
+    answer: 答案
 test:
   notices: *1
   reports: *2

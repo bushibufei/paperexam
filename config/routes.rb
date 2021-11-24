@@ -127,6 +127,22 @@ Rails.application.routes.draw do
     get :download_append, :on => :member
     get :query_all, :on => :collection
   end
+  resources :mcqs do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :mcq_options do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :tofs do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :qaas do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
   resources :flower
 
 end
