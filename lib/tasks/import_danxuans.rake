@@ -4,7 +4,8 @@ require 'logger'
 namespace 'db' do
   desc "init danxuan"
   task(:import_danxuans => :environment) do
-    file = "lib/tasks/data/danxuantiku.txt"
+    #file = "lib/tasks/data/danxuantiku.txt"
+    file = "lib/tasks/data/ti2danxuan.txt"
     contents = File.read(file)
     ctns = contents.split('#$#')
     ctns.each do |ctn|
@@ -23,6 +24,7 @@ namespace 'db' do
       orderno = title_mch[1]
       title = title_mch[2]
 
+      puts title
       if ansmtch.nil? || title.nil?
         puts orderno + "title has error"
         break
@@ -33,6 +35,7 @@ namespace 'db' do
       flag = false
       count = 0
       opt_arr.each do |opt|
+        puts opt
         opts = /([ABCDEF])(\p{P}*)([^ABCDEF]+)/.match(opt.upcase)
         ans = opts[1]
         if opts[3].nil?

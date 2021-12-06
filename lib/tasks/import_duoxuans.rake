@@ -40,7 +40,7 @@ namespace 'db' do
         end
         if ansmtch.include?(ans)
           flag = true
-          McqOption.create(:title => opts[3].strip, :mcq => @mcq, :answer => flag)
+          McqOption.create(:title => opts[3].strip, :mcq => @mcq, :answer => flag, :sequence => ansmtch.index(ans) + 1)
         else
           McqOption.create(:title => opts[3].strip, :mcq => @mcq)
         end

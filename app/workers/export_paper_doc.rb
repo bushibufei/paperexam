@@ -55,7 +55,7 @@ class ExportPaperDoc
 
     if mcq != 0
       order += 1
-      @mcqs = Mcq.all.sample(qaa)
+      @mcqs = Mcq.all.sample(mcq)
       header = order.to_s + '多项选择题(每题' + mcq_score + '分)'
       docx.h4 header 
       answers += '#$#' + header + '#$#'
@@ -64,7 +64,7 @@ class ExportPaperDoc
         key = index+1
         key = key.to_s
         docx.p key + ' ' + mcq.title
-        options = mcq.mcq_options.shuffle
+        options = mcq.mcq_options
         answer_cache = ''
         options.each_with_index do |opt, ind|
           docx.p tag[ind] + " " + opt.title
