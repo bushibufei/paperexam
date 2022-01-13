@@ -20,15 +20,15 @@ zh-CN:
 
   layouts:
     application:
-      site_title: "山东公用水务集团物资管理系统"
+      site_title: "山东公用水务集团知识管理系统"
     application_control:
-      site_title: "山东公用水务集团物资管理系统"
+      site_title: "山东公用水务集团知识管理系统"
     application_mobile:
-      site_title: "山东公用水务集团物资管理系统"
+      site_title: "山东公用水务集团知识管理系统"
     application_home:
-      site_title: "山东公用水务集团物资管理系统"
+      site_title: "山东公用水务集团知识管理系统"
     application_no_header:
-      site_title: "山东公用水务集团物资管理系统"
+      site_title: "山东公用水务集团知识管理系统"
   views:
       pagination:
         first: "首页"
@@ -226,7 +226,7 @@ zh-CN:
   trees:
     index:
       title:
-        山东公用水务集团物资管理系统
+        山东公用水务集团知识管理系统
   pick_records:
     index:
       title:
@@ -891,19 +891,19 @@ zh-CN:
       title: ajax查询所有污水设备
   project_items:
     index:
-      title: 工程物资列表  
+      title: 工程知识列表  
     new:
-      title: 新建工程物资
+      title: 新建工程知识
     create:
-      title: 新建工程物资
+      title: 新建工程知识
     edit:
-      title: 编辑工程物资
+      title: 编辑工程知识
     update:
-      title: 编辑工程物资
+      title: 编辑工程知识
     show:
-      title: 工程物资详情 
+      title: 工程知识详情 
     destroy:
-      title: 删除工程物资 
+      title: 删除工程知识 
     update_count:
       title: 更改数量 
     xls_download:
@@ -911,7 +911,7 @@ zh-CN:
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询所有工程物资
+      title: ajax查询所有工程知识
   repair_parts:
     index:
       title: 维修配件列表  
@@ -937,19 +937,19 @@ zh-CN:
       title: ajax查询所有维修配件
   emergencies:
     index:
-      title: 应急物资列表  
+      title: 应急知识列表  
     new:
-      title: 新建应急物资
+      title: 新建应急知识
     create:
-      title: 新建应急物资
+      title: 新建应急知识
     edit:
-      title: 编辑应急物资
+      title: 编辑应急知识
     update:
-      title: 编辑应急物资
+      title: 编辑应急知识
     show:
-      title: 应急物资详情 
+      title: 应急知识详情 
     destroy:
-      title: 删除应急物资 
+      title: 删除应急知识 
     update_count:
       title: 更改数量 
     xls_download:
@@ -957,7 +957,7 @@ zh-CN:
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询所有应急物资
+      title: ajax查询所有应急知识
   stuffs:
     index:
       title: 化学菌剂列表  

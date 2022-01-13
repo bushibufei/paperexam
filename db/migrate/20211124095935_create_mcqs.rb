@@ -4,6 +4,8 @@ class CreateMcqs < ActiveRecord::Migration
     
       t.text :title
     
+      t.references :qes_bank
+
       t.timestamps null: false
     end
   end

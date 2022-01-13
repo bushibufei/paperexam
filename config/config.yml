@@ -148,7 +148,7 @@ defaults:
     btn_show: 详情
     btn_delete: 删除
     btn_save: 保存
-    company_name: 山东公用水务集团物资管理系统
+    company_name: 山东公用水务集团知识管理系统
     opening: 新用户
     pending: 待审核
     rejected: 不通过
@@ -358,7 +358,7 @@ defaults:
     label: 工程二级分类
     name: 名称
   project_items: &44
-    label: 工程物资
+    label: 工程知识
     name: 名称
     idno: 编码
     unit: 单位
@@ -376,7 +376,7 @@ defaults:
     desc: 备注
     count: 数量
   emergencies: &46
-    label: 应急物资
+    label: 应急知识
     name: 名称
     idno: 编码
     unit: 单位
@@ -483,8 +483,8 @@ development:
     qaa: 问答题数量
     qaa_score: 问答题分值
     desc: 备注
-    right: '对'
-    error: '错'
+    right: 对
+    error: 错
   singles:
     label: 单选题
     title: 题目
@@ -507,6 +507,23 @@ development:
     label: 问答题
     title: 标题
     answer: 答案
+  qes_banks:
+    label: 题库
+    name: 题库名
+    editor: 编辑
+    single_count: 单选题数量
+    mcq_count: 多选题数量
+    tof_count: 判断题数量
+    qaa_count: 问答题数量
+    single_type: 单选题
+    mcq_type: 多选题
+    tof_type: 判断题
+    qaa_type: 问答题
+
+  error_logs:
+    label: 错误日志
+    name: 名称
+    log_url: 路径
 test:
   notices: *1
   reports: *2

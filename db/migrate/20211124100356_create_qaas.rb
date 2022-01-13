@@ -7,6 +7,7 @@ class CreateQaas < ActiveRecord::Migration
       t.text :answer
     
 
+      t.references :qes_bank
     
       t.timestamps null: false
     end

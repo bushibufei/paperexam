@@ -1,4 +1,5 @@
 class Single < ActiveRecord::Base
+  belongs_to :qes_bank
 
   has_many :paper_singles, :dependent => :destroy
   has_many :papers, :through => :paper_singles

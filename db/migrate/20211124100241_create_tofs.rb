@@ -7,6 +7,7 @@ class CreateTofs < ActiveRecord::Migration
       t.boolean :answer,  null: false, default: false 
     
 
+      t.references :qes_bank
     
       t.timestamps null: false
     end

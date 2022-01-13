@@ -1,4 +1,13 @@
 module DayPdtRptsHelper
+  def options_for_qes_type
+    str = ""
+    str += "<option value='" + Setting.qes_banks.single_type + "'>" + Setting.qes_banks.single_type + "</option>"
+         + "<option value='" + Setting.qes_banks.mcq_type + "'>" + Setting.qes_banks.mcq_type + "</option>"
+         + "<option value='" + Setting.qes_banks.tof_type + "'>" + Setting.qes_banks.tof_type + "</option>"
+         + "<option value='" + Setting.qes_banks.qaa_type + "'>" + Setting.qes_banks.qaa_type + "</option>"
+    raw(str)
+  end
+
 
   def options_for_my_factory(factories)
     str = ""

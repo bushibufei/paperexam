@@ -1,3 +1,5 @@
+= link_to qes_banks_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
+  = fa_icon "codepen", text: "题库管理"
 = link_to papers_path, :class => "list-group-item list-group-item-action border-0 text-left sidebar-text-font px-0" do
   = fa_icon "codepen", text: "考试试卷"
 - if current_user.has_role?(Setting.roles.role_fct)

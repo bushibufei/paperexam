@@ -111,9 +111,8 @@ Rails.application.routes.draw do
     get :xls_download, :on => :collection
     get :query_all, :on => :collection
   end
-  resources :singles do
+  resources :singles, :only => [] do
     get :download_append, :on => :member
-    post :parse_excel, :on => :collection
     get :xls_download, :on => :collection
     get :query_all, :on => :collection
   end
@@ -121,7 +120,7 @@ Rails.application.routes.draw do
     get :download_append, :on => :member
     get :query_all, :on => :collection
   end
-  resources :mcqs do
+  resources :mcqs, :only => [] do
     get :download_append, :on => :member
     get :query_all, :on => :collection
   end
@@ -129,13 +128,40 @@ Rails.application.routes.draw do
     get :download_append, :on => :member
     get :query_all, :on => :collection
   end
-  resources :tofs do
+  resources :tofs, :only => [] do
     get :download_append, :on => :member
     get :query_all, :on => :collection
   end
-  resources :qaas do
+  resources :qaas, :only => [] do
     get :download_append, :on => :member
     get :query_all, :on => :collection
+  end
+  resources :qes_banks do
+    get :download_append, :on => :member
+    post :parse_excel, :on => :collection
+    get :xls_download, :on => :collection
+    get :query_all, :on => :collection
+    resources :singles do
+      get :download_append, :on => :member
+      post :parse_excel, :on => :collection
+      get :xls_download, :on => :collection
+      get :query_all, :on => :collection
+    end
+    resources :mcqs do
+      get :download_append, :on => :member
+      get :query_all, :on => :collection
+    end
+    resources :tofs do
+      get :download_append, :on => :member
+      get :query_all, :on => :collection
+    end
+    resources :qaas do
+      get :download_append, :on => :member
+      get :query_all, :on => :collection
+    end
+  end
+  resources :error_logs, :only => [:index] do
+    get :download, :on => :member
   end
   resources :flower
 

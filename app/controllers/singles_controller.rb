@@ -5,10 +5,8 @@ class SinglesController < ApplicationController
 
    
   def index
-    @single = Single.new
-   
-    #@singles = Single.all.page( params[:page]).per( Setting.systems.per_page )
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @singles = @qes_bank.singles.page( params[:page]).per( Setting.systems.per_page )
   end
    
 
@@ -42,8 +40,8 @@ class SinglesController < ApplicationController
 
    
   def new
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
     @single = Single.new
-    
   end
    
 
@@ -102,38 +100,10 @@ class SinglesController < ApplicationController
   
   
   def parse_excel
+    qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    parse = ParseSingle.new(current_user)
     excel = params["excel_file"]
-    tool = ExcelTool.new
-    results = tool.parseExcel(excel.path)
-
-    a_str = ""
-    b_str = ""
-    c_str = "" 
-    d_str = ""
-    e_str = ""
-    f_str = ""
-    g_str = ""
-
-    results["Sheet1"][1..-1].each do |items|
-      items.each do |k, v|
-        if !(/A/ =~ k).nil?
-          a_str = v.nil? ? "" : v 
-        elsif !(/B/ =~ k).nil?
-          b_str = v.nil? ? "" : v 
-        elsif !(/C/ =~ k).nil?
-          c_str = v.nil? ? "" : v 
-        elsif !(/D/ =~ k).nil?
-          d_str = v.nil? ? "" : v 
-        elsif !(/E/ =~ k).nil?
-          e_str = v.nil? ? "" : v 
-        elsif !(/F/ =~ k).nil?
-          f_str = v.nil? ? "" : v 
-        elsif !(/G/ =~ k).nil?
-          g_str = v.nil? ? "" : v 
-          break
-        end
-      end
-    end
+    parse.process(qes_bank, excel)
 
     redirect_to :action => :index
   end 

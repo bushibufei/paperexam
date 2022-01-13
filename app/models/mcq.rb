@@ -1,5 +1,6 @@
 class Mcq < ActiveRecord::Base
-
+  belongs_to :qes_bank
+  belongs_to :paper
 
 
   has_many :paper_mcqs, :dependent => :destroy
@@ -11,7 +12,6 @@ class Mcq < ActiveRecord::Base
   accepts_nested_attributes_for :mcq_options, reject_if: :all_blank, allow_destroy: true
 
 
-  belongs_to :paper
 
 
 
