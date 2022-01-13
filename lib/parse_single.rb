@@ -29,6 +29,10 @@ class ParseSingle
       orderno = title_mch[1]
       title = title_mch[2]
 
+      @single = qes_bank.singles.where(:title => title.strip)
+      next unless @single.blank?
+      
+
       if ansmtch.nil? || title.nil?
         @error.error ctn + '标题有错误'
         next
