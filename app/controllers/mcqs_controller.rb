@@ -3,12 +3,9 @@ class McqsController < ApplicationController
   before_filter :authenticate_user!
   #authorize_resource
 
-   
   def index
-    @mcq = Mcq.new
-   
-    #@mcqs = Mcq.all.page( params[:page]).per( Setting.systems.per_page )
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @mcqs = @qes_bank.mcqs
   end
    
 
@@ -34,16 +31,15 @@ class McqsController < ApplicationController
 
    
   def show
-   
-    @mcq = Mcq.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @mcq = @qes_bank.mcqs.find(iddecode(params[:id]))
   end
    
 
    
   def new
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
     @mcq = Mcq.new
-    
   end
    
 
@@ -58,45 +54,44 @@ class McqsController < ApplicationController
     end
   end
    
-
-   
   def edit
-   
-    @mcq = Mcq.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @mcq = @qes_bank.mcqs.find(iddecode(params[:id]))
   end
    
-
-   
   def update
-   
-    @mcq = Mcq.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @mcq = @qes_bank.mcqs.find(iddecode(params[:id]))
    
     if @mcq.update(mcq_params)
-      redirect_to mcq_path(idencode(@mcq.id)) 
+      redirect_to edit_qes_bank_mcq_path(idencode(@qes_bank.id), idencode(@mcq.id)) 
     else
       render :edit
     end
   end
    
-
-   
   def destroy
-   
-    @mcq = Mcq.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @mcq = @qes_bank.mcqs.find(iddecode(params[:id]))
    
     @mcq.destroy
     redirect_to :action => :index
   end
    
+  def xls_download
+    send_file File.join(Rails.root, "templates", "问答题模板.txt"), :filename => "问答题模板.txt", :type => "application/force-download", :x_sendfile=>true
+  end
+  
+  
+  
+  def parse_excel
+    qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    parse = ParseMcq.new(current_user)
+    excel = params["excel_file"]
+    parse.process(qes_bank, excel)
 
-  
-
-  
-
-  
-  
-  
+    redirect_to :action => :index
+  end 
 
   private
     def mcq_params

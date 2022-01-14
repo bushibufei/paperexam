@@ -1,9 +1,9 @@
-class ParseSingle 
+class ParseMcq
   def initialize(current_user)
     log_dir = File.join(Rails.root, "public", "errorlogs")
     Dir::mkdir(log_dir) unless File.directory?(log_dir)
 
-    name = Time.now.strftime('%Y-%m-%d%H:%M:%S') + '上传单选题记录' + ".log"
+    name = Time.now.strftime('%Y-%m-%d%H:%M:%S') + '上传多选题记录' + ".log"
     path = log_dir + '/' + name
     ErrorLog.create(:user => current_user, :name => name, :log_url => path) 
     @error = Logger.new(path)
@@ -16,59 +16,60 @@ class ParseSingle
       arr = ctn.strip.split(/\r\n/)
       if arr.size != 3
         @error.error ctn + '题不是3分结构'
-        next
       end
 
       titles = arr[0].strip
       options = arr[1].strip
       answer = arr[2].strip.upcase
 
-      ansmtch = /[ABCDEF]/.match(answer) 
+      ansmtch = answer.scan(/[ABCDEFGH]/) 
 
       title_mch = /(\d+\p{P})(.+)/.match(titles)
       if title_mch.nil?
         @error.error ctn + '标题格式不正确'
         next
       end
+
       orderno = title_mch[1]
       title = title_mch[2]
 
-      @single = qes_bank.singles.where(:title => title.strip)
-      next unless @single.blank?
-      
+      @mcq = qes_bank.mcqs.where(:title => title.strip)
+      next unless @mcq.blank?
 
       if ansmtch.nil? || title.nil?
         @error.error ctn + '标题有错误'
         next
       end
       
-      opt_arr = options.scan(/[ABCDEF][^ABCDEF]+/)
+      opt_arr = options.scan(/[ABCDEFGH][^ABCDEFGH]+/)
       flag = false
-      count = 0
       hash_arr = []
       opt_arr.each do |opt|
-        opts = /([ABCDEF])(\p{P}*)([^ABCDEF]+)/.match(opt.upcase)
+        opts = /([ABCDEFGH])(\p{P}*)([^ABCDEFGH]+)/.match(opt.upcase)
         ans = opts[1]
         if opts[3].nil?
           break
         end
-        if ans == ansmtch[0]
-          count += 1
+        if ansmtch.include?(ans)
           flag = true
-          hash_arr << {:title => opts[3].strip, :answer => true}
+          hash_arr << {:title => opts[3].strip, :answer => true, :sequence => ansmtch.index(ans) + 1}
         else
           hash_arr << {:title => opts[3].strip, :answer => false}
         end
       end
 
-      if !flag || count > 1
-        @error.error ctn + '答案格式有错误或单选题答案超出了一个'
-        next
+      if !flag
+        @error.error ctn + '答案格式有错误'
+        break
       end
 
-      @single = Single.create!(:qes_bank => qes_bank, :title => title.strip)
+      @mcq = Mcq.create!(:qes_bank => qes_bank, :title => title.strip)
       hash_arr.each do |item|
-        SingleOption.create(:single => @single, :title => item[:title], :answer => item[:answer])
+        if item[:answer]
+          McqOption.create(:mcq => @mcq, :title => item[:title], :answer => item[:answer], :sequence => item[:sequence])
+        else                             
+          McqOption.create(:mcq => @mcq, :title => item[:title], :answer => item[:answer])
+        end
       end
     end
   end

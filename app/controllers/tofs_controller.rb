@@ -3,12 +3,9 @@ class TofsController < ApplicationController
   before_filter :authenticate_user!
   #authorize_resource
 
-   
   def index
-    @tof = Tof.new
-   
-    #@tofs = Tof.all.page( params[:page]).per( Setting.systems.per_page )
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @tofs = @qes_bank.tofs
   end
    
 
@@ -21,9 +18,7 @@ class TofsController < ApplicationController
         #:factory => idencode(factory.id),
         :id => idencode(item.id),
        
-        :title => item.title,
-       
-        :answer => item.answer
+        :title => item.title
       
       }
     end
@@ -36,16 +31,15 @@ class TofsController < ApplicationController
 
    
   def show
-   
-    @tof = Tof.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @tof = @qes_bank.tofs.find(iddecode(params[:id]))
   end
    
 
    
   def new
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
     @tof = Tof.new
-    
   end
    
 
@@ -60,44 +54,44 @@ class TofsController < ApplicationController
     end
   end
    
-
-   
   def edit
-   
-    @tof = Tof.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @tof = @qes_bank.tofs.find(iddecode(params[:id]))
   end
    
-
-   
   def update
-   
-    @tof = Tof.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @tof = @qes_bank.tofs.find(iddecode(params[:id]))
    
     if @tof.update(tof_params)
-      redirect_to tof_path(idencode(@tof.id)) 
+      redirect_to edit_qes_bank_tof_path(idencode(@qes_bank.id), idencode(@tof.id)) 
     else
       render :edit
     end
   end
    
-
-   
   def destroy
-   
-    @tof = Tof.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @tof = @qes_bank.tofs.find(iddecode(params[:id]))
    
     @tof.destroy
     redirect_to :action => :index
   end
    
+  def xls_download
+    send_file File.join(Rails.root, "templates", "判断题模板.txt"), :filename => "判断题模板.txt", :type => "application/force-download", :x_sendfile=>true
+  end
+  
+  
+  
+  def parse_excel
+    qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    parse = ParseTof.new(current_user)
+    excel = params["excel_file"]
+    parse.process(qes_bank, excel)
 
-  
-
-  
-
-  
-  
+    redirect_to :action => :index
+  end 
   
 
   private

@@ -9,62 +9,68 @@
         %h5
           = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
 
-          
+          = link_to xls_download_qes_bank_mcqs_path(idencode(@qes_bank.id)), :class => "button button-royal pull-right button-small mr-1" do
+            下载模板
 
-          
+          %button.button.button-caution.button-small.pull-right.mr-1{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
+            上传模板
 
-          -#
-            = link_to "/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
-              = fa_icon "plus", text: Setting.systems.btn_new, right: false 
-          %button.button.button-primary.button-small.pull-right.mr-1{"data-target" => "#newModal", "data-toggle" => "modal", :type => "button"}
+          = link_to "/qes_banks/#{idencode(@qes_bank.id)}/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid
           .row
-            -#
-              .col-md-12
-              = hidden_field_tag "fct", idencode(@factory.id), :class => "fct-val"
             .col-md-12
-              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+              %table#item-table.text-left.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
                 %thead
                   %tr
-                    %th{:scope => "col", :'data-field' => "id"} #
-                  
                     %th{:scope => "col", :'data-field' => "title"}
                       = Setting.mcqs.title
                   
-                    %th{:scope => "col", :'data-field' => "button"}
-              -#
                 %tbody
                   - @mcqs.each_with_index do |mcq, index|
                     %tr
-                      %td{:scope => "row"}
-                        = index+1
-                    
                       %td
-                        = mcq.title
-                      %td
-                        .container-fluid
-                          .row.justify-content-center
-                            = link_to "编辑", edit_mcq_path(idencode(mcq.id)), :class => "button button-royal button-small mr-1" 
-                            = link_to "查看",  mcq_path(idencode(mcq.id)), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  mcq_path(idencode(mcq.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
-            -#
-              .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
-                = paginate @mcqs, window: 2, left: 1, right: 1 
+                        %p
+                          = index+1
+                          = mcq.title
+                          = link_to "编辑", edit_qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :class => "mr-1" 
+                          = link_to "删除", qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
+                        %p
+                          - mcq.mcq_options.each do |option|
+                            %span.mr-2{:class => option.answer ? 'text-danger' : ''}
+                              = option.title
+              -#
+                = link_to , qes_bank_mcq_path(idencode(@qes_bank.id), idencode(mcq.id)), :class => 'text-dark' 
+                .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
+                  = paginate @mcqs, window: 2, left: 1, right: 1 
       = render "layouts/bootstrap/card"
 
 
-
-#newModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newModalLabel", :tabindex => "-1"}
-  .modal-dialog.modal-xl.modal-dialog-centered
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1"}
+  .modal-dialog.modal-dialog-centered
     .modal-content
       .modal-header
-        -#
-          = image_tag "gykg.jpg"
-          %h5.text-success
-            = Setting.mcqs.label
+        %h5#exampleModalLabel.modal-title
+          题库上传 
+          %span.text-danger
+            上传txt格式文件
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} x 
       .modal-body
-        = render 'form'
+        = form_tag "/qes_banks/#{idencode(@qes_bank.id)}/mcqs/parse_excel", multipart: true, id: "form-parse-excel", onsubmit: 'form_parse_submit()' do
+          .form-group.row
+            -#
+              = label_tag "", nil, :class => "col-4 text-right col-form-label col-form-label"
+            .col-12
+              %label.newbutton.button.button-primary.w-100
+                %p.append-url
+                  选择文件
+                = file_field_tag "excel_file", :required => true , accept: 'text/plain', :class => "select-file", :onchange => "readFileName(this);"
+          .form-group.row
+            .col-sm-12
+              .progress.ctn-progress
+                .progress-bar.w-100.progress-bar-striped.progress-bar-animated{:role => "progressbar", :"aria-valuenow" => "100", :"aria-valuemin" => "0", :"aria-valuemax" => "100"}
+          .form-group.row
+            .col-8
+              = submit_tag '保存', :class => "btn btn-primary btn-parse-submit " 

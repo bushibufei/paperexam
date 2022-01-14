@@ -1,7 +1,7 @@
 .container-fluid
   .row.justify-content-sm-center
     .col-sm-12
-      = form_for @mcq, :url => "/mcqs/#{@mcq.id ? idencode(@mcq.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+      = form_for [@qes_bank, @mcq], :url => "/qes_banks/#{idencode(@qes_bank.id)}/mcqs/#{@mcq.id ? idencode(@mcq.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
         - if @mcq.errors.any?
           #error_explanation.alert.alert-danger.alert-dismissible.fade.show
             %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
@@ -28,11 +28,20 @@
                       %td.p-2.text-center
                         = f.label Setting.mcqs.title, :class => "text-center"
                       %td.p-2.text-center
-                        = f.text_area :title, :class => "form-control", :rows => "10" , :required => true
+                        = f.text_field :title, :class => "form-control" , :required => true
                       
                     
           
           
+            -# 
+              .form-group.row
+              = f.label "附图", :class => "col-2 text-right col-form-label col-form-label"
+              .col-10
+                .row
+                  = f.fields_for :enclosures do |enclosure|
+                    = render 'enclosure_fields', f: enclosure
+                  .links
+                    = link_to_add_association "添加文件", f, :enclosures, :class => "button button-small button-primary"
           
           
           

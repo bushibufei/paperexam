@@ -6,7 +6,7 @@ class SinglesController < ApplicationController
    
   def index
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    @singles = @qes_bank.singles.page( params[:page]).per( Setting.systems.per_page )
+    @singles = @qes_bank.singles
   end
    
 
