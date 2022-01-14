@@ -111,7 +111,7 @@ defaults:
     super_admin: 超级管理员
     role_fct: 厂区用户
     role_grp: 集团用户
-    role_warehouse: 仓库管理
+    role_student: 学生
     role_device: 设备管理
   permissions: &13
     super_admin: 管理系统所有资源
@@ -519,11 +519,14 @@ development:
     mcq_type: 多选题
     tof_type: 判断题
     qaa_type: 问答题
-
   error_logs:
     label: 错误日志
     name: 名称
     log_url: 路径
+  students:
+    label: 学生
+    name: 姓名
+    idno: 身份证号
 test:
   notices: *1
   reports: *2

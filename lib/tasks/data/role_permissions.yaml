@@ -1,13 +1,13 @@
 ---
-#- 
-#  role_name: 厂区用户
-#  level: 1
-#- 
-#  role_name: 集团用户
-#  level: 1
-#- 
-#  role_name: 仓库管理 
-#  level: 1
+- 
+  role_name: 厂区用户
+  level: 1
+- 
+  role_name: 集团用户
+  level: 1
+- 
+  role_name: 学生 
+  level: 1
 #  permissions: 
 #    -
 #      controller: water_items_controller

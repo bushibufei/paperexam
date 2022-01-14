@@ -90,12 +90,9 @@ Rails.application.routes.draw do
  
   resources :factories, :only => [:edit, :update] do
     get :bigscreen, :on => :member
-    resources :water_items do
-      get :download_append, :on => :member
-      get :update_count, :on => :member
+    resources :students do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection
-      get :query_all, :on => :collection
     end
   end
 
