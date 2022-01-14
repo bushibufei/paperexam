@@ -1,7 +1,7 @@
 .container-fluid
   .row.justify-content-sm-center
     .col-sm-12
-      = form_for @single, :url => "/qes_banks/#{idencode(@qes_bank.id)}/singles/#{@single.id ? idencode(@single.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+      = form_for [@qes_bank, @single], :url => "/qes_banks/#{idencode(@qes_bank.id)}/singles/#{@single.id ? idencode(@single.id) : ''}", :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
         - if @single.errors.any?
           #error_explanation.alert.alert-danger.alert-dismissible.fade.show
             %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}

@@ -148,7 +148,7 @@ defaults:
     btn_show: 详情
     btn_delete: 删除
     btn_save: 保存
-    company_name: 山东公用水务集团知识管理系统
+    company_name: 山东公用水务集团E-Learning系统
     opening: 新用户
     pending: 待审核
     rejected: 不通过

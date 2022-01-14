@@ -32,9 +32,8 @@ class SinglesController < ApplicationController
 
    
   def show
-   
-    @single = Single.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @single = @qes_bank.singles.find(iddecode(params[:id]))
   end
    
 
@@ -56,45 +55,32 @@ class SinglesController < ApplicationController
     end
   end
    
-
-   
   def edit
-   
-    @single = Single.find(iddecode(params[:id]))
-   
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @single = @qes_bank.singles.find(iddecode(params[:id]))
   end
    
-
-   
   def update
-   
-    @single = Single.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @single = @qes_bank.singles.find(iddecode(params[:id]))
    
     if @single.update(single_params)
-      redirect_to single_path(idencode(@single.id)) 
+      redirect_to edit_qes_bank_single_path(idencode(@qes_bank.id), idencode(@single.id)) 
     else
       render :edit
     end
   end
    
-
-   
   def destroy
-   
-    @single = Single.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    @single = @qes_bank.singles.find(iddecode(params[:id]))
    
     @single.destroy
     redirect_to :action => :index
   end
    
-
-  
-
-  
-
-  
   def xls_download
-    send_file File.join(Rails.root, "templates", "表格模板.xlsx"), :filename => "表格模板.xlsx", :type => "application/force-download", :x_sendfile=>true
+    send_file File.join(Rails.root, "templates", "单选题模板.txt"), :filename => "单选题模板.txt", :type => "application/force-download", :x_sendfile=>true
   end
   
   

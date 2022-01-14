@@ -5,8 +5,7 @@ class ErrorLogsController < ApplicationController
 
    
   def index
-    @error_logs = current_user.error_logs.page( params[:page]).per( Setting.systems.per_page )
-   
+    @error_logs = current_user.error_logs.order('created_at desc')
   end
 
   def download

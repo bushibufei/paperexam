@@ -111,35 +111,7 @@ Rails.application.routes.draw do
     get :xls_download, :on => :collection
     get :query_all, :on => :collection
   end
-  resources :singles, :only => [] do
-    get :download_append, :on => :member
-    get :xls_download, :on => :collection
-    get :query_all, :on => :collection
-  end
-  resources :single_options do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
-  resources :mcqs, :only => [] do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
-  resources :mcq_options do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
-  resources :tofs, :only => [] do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
-  resources :qaas, :only => [] do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
   resources :qes_banks do
-    get :download_append, :on => :member
-    post :parse_excel, :on => :collection
-    get :xls_download, :on => :collection
     get :query_all, :on => :collection
     resources :singles do
       get :download_append, :on => :member

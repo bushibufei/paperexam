@@ -99,17 +99,6 @@ class QesBanksController < ApplicationController
     redirect_to :action => :index
   end
    
-
-  
-
-  
-
-  
-  def xls_download
-    send_file File.join(Rails.root, "templates", "表格模板.xlsx"), :filename => "表格模板.xlsx", :type => "application/force-download", :x_sendfile=>true
-  end
-  
-  
   private
     def qes_bank_params
       params.require(:qes_bank).permit( :name, :editor, :single_count, :mcq_count, :tof_count, :qaa_count , :photo)
