@@ -42,12 +42,14 @@ class User < ActiveRecord::Base
   #  #build_account
   #end
 
-  #before_save :store_unique_number
-  #def store_unique_number
-  #  if self.number == ""
-  #    self.number = Time.now.to_i.to_s + "%04d" % [rand(10000)]
-  #  end
-  #end
+  before_save :store_unique_number
+  def store_unique_number
+    if self.number == ""
+      str = [*'a'..'z',*'0'..'9',*'A'..'Z'].sample(10).join
+      number = Time.now.to_i.to_s + str + "%04d" % [rand(10000)]
+      self.number = number 
+    end
+  end
 
   #after_create :assign_data
   #def assign_data

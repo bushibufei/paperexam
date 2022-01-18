@@ -1,6 +1,6 @@
 class QesBanksController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:query_all]
   #authorize_resource
 
    
@@ -18,12 +18,9 @@ class QesBanksController < ApplicationController
     obj = []
     items.each do |item|
       obj << {
-        #:factory => idencode(factory.id),
         :id => idencode(item.id),
        
         :name => item.name,
-       
-        :editor => item.editor,
        
         :single_count => item.single_count,
        

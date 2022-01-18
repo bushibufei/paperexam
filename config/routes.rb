@@ -96,6 +96,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :wx_users, :only => [] do
+    post :get_userid, :on => :collection
+  end
   
   #resources :departments do
   #  get :download_append, :on => :member

@@ -160,7 +160,7 @@ gem 'deep_cloneable', '~> 3.0.0'
 
 #gem 'chinese_pinyin'
 
-#gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', :require => 'rack/cors'
 
 #gem 'yaml_db'
 
