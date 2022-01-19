@@ -1,6 +1,6 @@
 class TofsController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:query_all]
   #authorize_resource
 
   def index
@@ -10,16 +10,20 @@ class TofsController < ApplicationController
    
 
   def query_all 
-    items = Tof.all
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    items = @qes_bank.tofs
    
     obj = []
-    items.each do |item|
+    items.each_with_index do |item, number|
+      number = (number + 1).to_s + '、'
+      option_arrs = [
+        {"id": 0, "value": "正确", "content": ''},
+        {"id": 1, "value": "错误", "content": ''}
+      ]
       obj << {
-        #:factory => idencode(factory.id),
-        :id => idencode(item.id),
-       
-        :title => item.title
-      
+        :title => number + item.title,
+        :options => option_arrs,
+        :answer => item.answer ? "正确" : "错误"
       }
     end
     respond_to do |f|

@@ -1,6 +1,6 @@
 class McqsController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:query_all]
   #authorize_resource
 
   def index
@@ -10,24 +10,34 @@ class McqsController < ApplicationController
    
 
   def query_all 
-    items = Mcq.all
+    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+    items = @qes_bank.mcqs.all
+    tag_arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
    
     obj = []
-    items.each do |item|
+    items.each_with_index do |item, number|
+      number = (number + 1).to_s + '、'
+      options = item.mcq_options
+      option_arrs = []
+      answer = ''
+      options.each_with_index do |opt, index|
+        option_arrs << {
+          "id": index,
+          "value": tag_arr[index],
+          "content": opt.title
+        }
+        answer += tag_arr[index] if opt.answer
+      end
       obj << {
-        #:factory => idencode(factory.id),
-        :id => idencode(item.id),
-       
-        :title => item.title
-      
+        :title => number + item.title,
+        :options => option_arrs,
+        :answer => answer
       }
     end
     respond_to do |f|
       f.json{ render :json => obj.to_json}
     end
   end
-
-
 
    
   def show
