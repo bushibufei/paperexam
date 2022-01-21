@@ -62,11 +62,11 @@ Rails.application.routes.draw do
   #end
 
   resources :notices
-  #resources :articles do
-  #  get :export, :on => :collection
-  #  get :main_image, :on => :member
-  #  get :detail_image, :on => :member
-  #end
+  resources :articles do
+    get :export, :on => :collection
+    get :main_image, :on => :member
+    get :detail_image, :on => :member
+  end
 
   #resources :systems, :only => [] do
   #  get :send_confirm_code, :on => :collection
@@ -136,6 +136,11 @@ Rails.application.routes.draw do
   end
   resources :error_logs, :only => [:index] do
     get :download, :on => :member
+  end
+  resources :essays do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+    get :query_show, :on => :member
   end
   resources :flower
 

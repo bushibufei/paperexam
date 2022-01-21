@@ -124,7 +124,7 @@ defaults:
     poundage: 0.1
     commision: 0.1
     authc_pay: 1
-    host: http://47.98.167.213
+    host: 'http://192.168.100.119'
     status_en_yes: true
     status_en_no: false
     status_yes: 是
@@ -527,6 +527,12 @@ development:
     label: 学生
     name: 姓名
     idno: 身份证号
+  essays:
+    label: 学习文章
+    title: 标题
+    dept: 部门
+    article_date: 日期
+    content: 文章内容
 test:
   notices: *1
   reports: *2
