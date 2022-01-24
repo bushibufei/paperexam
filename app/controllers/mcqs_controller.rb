@@ -11,7 +11,7 @@ class McqsController < ApplicationController
 
   def query_all 
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.mcqs.all
+    items = @qes_bank.mcqs.all.shuffle
     tag_arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
    
     obj = []

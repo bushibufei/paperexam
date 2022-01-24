@@ -25,7 +25,7 @@
               .col-md-12
               = hidden_field_tag "fct", idencode(@factory.id), :class => "fct-val"
             .col-md-12
-              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
                 %thead
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
@@ -39,11 +39,7 @@
                     %th{:scope => "col", :'data-field' => "article_date"}
                       = Setting.essays.article_date
                   
-                    %th{:scope => "col", :'data-field' => "content"}
-                      = Setting.essays.content
-                  
                     %th{:scope => "col", :'data-field' => "button"}
-              -#
                 %tbody
                   - @essays.each_with_index do |essay, index|
                     %tr
@@ -57,29 +53,12 @@
                       %td
                         = essay.article_date
                       %td
-                        = essay.content
-                      %td
                         .container-fluid
                           .row.justify-content-center
                             = link_to "编辑", edit_essay_path(idencode(essay.id)), :class => "button button-royal button-small mr-1" 
                             = link_to "查看",  essay_path(idencode(essay.id)), :class => "button button-primary button-small mr-1" 
                             = link_to "删除",  essay_path(idencode(essay.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
-            -#
               .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
                 = paginate @essays, window: 2, left: 1, right: 1 
       = render "layouts/bootstrap/card"
 
-
-
-#newModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newModalLabel", :tabindex => "-1"}
-  .modal-dialog.modal-xl.modal-dialog-centered
-    .modal-content
-      .modal-header
-        -#
-          = image_tag "gykg.jpg"
-          %h5.text-success
-            = Setting.essays.label
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} x 
-      .modal-body
-        = render 'form'

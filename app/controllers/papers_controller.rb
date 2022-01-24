@@ -111,6 +111,100 @@ class PapersController < ApplicationController
     redirect_to :action => :index
   end
    
+   def generate_paper
+     @paper = Paper.find(iddecode(params[:id]))
+     name = @paper.name
+     _start = @paper.start_time.strftime("%Y-%m-%d %H:%M")
+     _end = @paper.end_time.strftime("%Y-%m-%d %H:%M")
+
+     single = @paper.single
+     mcq = @paper.mcq
+     tof = @paper.tof
+
+     single_score = @paper.single_score.to_s
+     mcq_score = @paper.mcq_score.to_s
+     tof_score = @paper.tof_score.to_s
+
+     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
+     obj = []
+     select_single(@qes_bank, single, obj)
+     select_mcq(@qes_bank, mcq, obj)
+     select_tof(@qes_bank, tof, obj)
+
+     respond_to do |f|
+       f.json{ render :json => obj.to_json}
+     end
+   end
+
+   def select_single(qes_bank, num, obj)
+     @singles = qes_bank.singles.all.shuffle.sample(num)
+     @singles.each_with_index do |item, number|
+       number = (number + 1).to_s + '、'
+       options = item.single_options.shuffle
+       option_arrs = []
+       answer = ''
+       options.each_with_index do |opt, index|
+         option_arrs << {
+           "id": index,
+           "value": tag_arr[index],
+           "content": tag_arr[index] + ' ' + opt.title,
+           "true_answer": opt.answer
+         }
+         answer = tag_arr[index] if opt.answer
+       end
+       obj << {
+         :type => '0',
+         :title => number + item.title,
+         :options => option_arrs,
+         :answer => answer
+       }
+     end
+   end
+
+   def select_mcq(qes_bank, num, obj) 
+     @mcqs = qes_bank.mcqs.all.shuffle.sample(num)
+     tag_arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+   
+     @mcqs.each_with_index do |item, number|
+       number = (number + 1).to_s + '、'
+       options = item.mcq_options
+       option_arrs = []
+       answer = ''
+       options.each_with_index do |opt, index|
+         option_arrs << {
+           "id": index,
+           "value": tag_arr[index],
+           "content": tag_arr[index] + ' ' + opt.title,
+           "true_answer": opt.answer
+         }
+         answer += tag_arr[index] if opt.answer
+       end
+       obj << {
+         :type => '1',
+         :title => number + item.title,
+         :options => option_arrs,
+         :answer => answer
+       }
+     end
+   end
+
+   def select_tof(qes_bank, num, obj) 
+     @tofs = qes_bank.tofs.all.shuffle.sample(num)
+    
+     @tofs.each_with_index do |item, number|
+       number = (number + 1).to_s + '、'
+       option_arrs = [
+         {"id": 0, "value": "A", "content": 'A 正确', "true_answer": item.answer ? true : false},
+         {"id": 1, "value": "B", "content": 'B 错误', "true_answer": item.answer ? false : true}
+       ]
+       obj << {
+         :type => '2',
+         :title => number + item.title,
+         :options => option_arrs,
+         :answer => item.answer ? 'A' : 'B'
+       }
+     end
+   end
 
    def download_paper
      @paper = Paper.find(iddecode(params[:id]))

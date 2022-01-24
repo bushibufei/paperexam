@@ -12,13 +12,13 @@ class SinglesController < ApplicationController
 
   def query_all 
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.singles.all
+    items = @qes_bank.singles.all.shuffle
     tag_arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
    
     obj = []
     items.each_with_index do |item, number|
       number = (number + 1).to_s + '、'
-      options = item.single_options
+      options = item.single_options.shuffle
       option_arrs = []
       answer = ''
       options.each_with_index do |opt, index|

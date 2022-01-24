@@ -11,7 +11,7 @@ class TofsController < ApplicationController
 
   def query_all 
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.tofs
+    items = @qes_bank.tofs.all.shuffle
    
     obj = []
     items.each_with_index do |item, number|

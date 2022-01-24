@@ -10,7 +10,7 @@ class QaasController < ApplicationController
    
   def query_all 
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.qaas
+    items = @qes_bank.qaas.all.shuffle
    
     obj = []
     items.each_with_index do |item, number|

@@ -7,9 +7,8 @@ class EssaysController < ApplicationController
 
    
   def index
-    @essay = Essay.new
    
-    #@essays = Essay.all.page( params[:page]).per( Setting.systems.per_page )
+    @essays = Essay.all.page( params[:page]).per( Setting.systems.per_page )
    
   end
    
