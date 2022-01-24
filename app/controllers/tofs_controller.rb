@@ -17,13 +17,14 @@ class TofsController < ApplicationController
     items.each_with_index do |item, number|
       number = (number + 1).to_s + '、'
       option_arrs = [
-        {"id": 0, "value": "正确", "content": ''},
-        {"id": 1, "value": "错误", "content": ''}
+        {"id": 0, "value": "A", "content": 'A 正确', "true_answer": item.answer ? true : false},
+        {"id": 1, "value": "B", "content": 'B 错误', "true_answer": item.answer ? false : true}
       ]
       obj << {
+        :type => '2',
         :title => number + item.title,
         :options => option_arrs,
-        :answer => item.answer ? "正确" : "错误"
+        :answer => item.answer ? 'A' : 'B'
       }
     end
     respond_to do |f|

@@ -24,11 +24,13 @@ class McqsController < ApplicationController
         option_arrs << {
           "id": index,
           "value": tag_arr[index],
-          "content": opt.title
+          "content": tag_arr[index] + ' ' + opt.title,
+          "true_answer": opt.answer
         }
         answer += tag_arr[index] if opt.answer
       end
       obj << {
+        :type => '1',
         :title => number + item.title,
         :options => option_arrs,
         :answer => answer

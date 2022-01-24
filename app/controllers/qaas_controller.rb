@@ -16,6 +16,7 @@ class QaasController < ApplicationController
     items.each_with_index do |item, number|
       number = (number + 1).to_s + '、'
       obj << {
+        :type => '3',
         :title => number + item.title,
         :options => [],
         :answer => item.answer

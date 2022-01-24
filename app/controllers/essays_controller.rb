@@ -57,7 +57,6 @@ class EssaysController < ApplicationController
       :article_date => @essay.article_date,
       :content => content 
     }
-    puts obj[:content]
 
     respond_to do |f|
       f.json{ render :json => obj.to_json}
