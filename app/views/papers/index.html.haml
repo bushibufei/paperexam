@@ -91,7 +91,8 @@
                         .container-fluid
                           .row.justify-content-center
                             = link_to "编辑", edit_paper_path(idencode(paper.id)), :class => "button button-royal button-small mr-1" 
-                            = link_to "组卷", generate_paper_path(idencode(paper.id)), :class => "button button-action button-small mr-1" 
+                            -#
+                              = link_to "组卷", generate_paper_path(idencode(paper.id)), :class => "button button-action button-small mr-1" 
                             = link_to "随机组卷", download_paper_paper_path(idencode(paper.id)), :class => "button button-primary button-small mr-1" 
                             -#
                               = link_to "查看",  paper_path(idencode(paper.id)), :class => "button button-primary button-small mr-1" 

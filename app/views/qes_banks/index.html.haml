@@ -27,7 +27,8 @@
                     %th{:scope => "col", :'data-field' => "name"}
                       = Setting.qes_banks.name
                   
-                    %th{:scope => "col", :'data-field' => "editor"}
+                    -#
+                      %th{:scope => "col", :'data-field' => "editor"}
                       = Setting.qes_banks.editor
                   
                     %th{:scope => "col", :'data-field' => "single_count"}
@@ -51,24 +52,25 @@
                     
                       %td
                         = qes_bank.name
-                      %td
+                      -#
+                        %td
                         = qes_bank.editor
                       %td
-                        = qes_bank.single_count
+                        = qes_bank.singles.count
                       %td
-                        = qes_bank.mcq_count
+                        = qes_bank.mcqs.count
                       %td
-                        = qes_bank.tof_count
+                        = qes_bank.tofs.count
                       %td
-                        = qes_bank.qaa_count
+                        = qes_bank.qaas.count
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_qes_bank_path(idencode(qes_bank.id)), :class => "button button-royal button-small mr-1" 
                             = link_to "单选题",  qes_bank_singles_path(idencode(qes_bank.id)), :class => "button button-primary button-small mr-1" 
                             = link_to "多选题",  qes_bank_mcqs_path(idencode(qes_bank.id)), :class => "button button-action button-small mr-1" 
                             = link_to "判断题",  qes_bank_tofs_path(idencode(qes_bank.id)), :class => "button button-caution button-small mr-1" 
                             = link_to "问答题",  qes_bank_qaas_path(idencode(qes_bank.id)), :class => "button button-highlight button-small mr-1" 
+                            = link_to "编辑", edit_qes_bank_path(idencode(qes_bank.id)), :class => "button button-royal button-small mr-1" 
                             = link_to "删除",  qes_bank_path(idencode(qes_bank.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
             .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
               = paginate @qes_banks, window: 2, left: 1, right: 1 
