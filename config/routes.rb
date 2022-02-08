@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'qes_banks#index'
+  root :to => 'advises#index'
 
   #mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config

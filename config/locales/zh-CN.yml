@@ -768,68 +768,6 @@ zh-CN:
       title: 厂区-编辑厂区信息
     update:
       title: 厂区-编辑厂区信息
-  emp_infs:
-    index:
-      title: 厂区-济宁环境监测系统进水水质数据 
-    fct_edit:
-      title: 厂区-环境监测系统进水水质数据-编辑
-    fct_update:
-      title: 厂区-环境监测系统进水水质数据-更新
-    fct_destroy:
-      title: 厂区-环境监测系统进水水质数据-删除
-    parse_fct_excel:
-      title: 厂区-环境监测系统进水水质数据-上传excel
-    create:
-      title: 厂区-环境监测系统进水水质数据-创建
-    grp_index:
-      title: 集团-济宁环境监测系统进水水质数据
-    edit:
-      title: 集团-编辑环境监测系统进水水质数据
-    update:
-      title: 集团-编辑环境监测系统进水水质数据
-    new:
-      title: 集团-添加环境监测系统进水水质数据
-    create:
-      title: 集团-添加环境监测系统进水水质数据
-    destroy:
-      title: 集团-删除环境监测系统进水水质数据
-    watercms_flow:
-      title: 水质流量
-    xls_download:
-      title: 集团-下载excel
-    parse_excel:
-      title: 集团-解析excel
-  emp_effs:
-    index:
-      title: 厂区-济宁环境监测系统出水水质数据 
-    fct_edit:
-      title: 厂区-环境监测系统出水水质数据-编辑
-    fct_update:
-      title: 厂区-环境监测系统出水水质数据-更新
-    fct_destroy:
-      title: 厂区-环境监测系统出水水质数据-删除
-    parse_fct_excel:
-      title: 厂区-环境监测系统出水水质数据-上传excel
-    create:
-      title: 厂区-环境监测系统出水水质数据-创建
-    grp_index:
-      title: 集团-济宁环境监测系统出水水质数据
-    edit:
-      title: 集团-编辑环境监测系统出水水质数据
-    update:
-      title: 集团-编辑环境监测系统出水水质数据
-    new:
-      title: 集团-添加环境监测系统出水水质数据
-    create:
-      title: 集团-添加环境监测系统出水水质数据
-    destroy:
-      title: 集团-删除环境监测系统出水水质数据
-    watercms_flow:
-      title: 水质流量
-    xls_download:
-      title: 集团-下载excel
-    parse_excel:
-      title: 集团-解析excel
   reports:
     index:
       title: 报表
@@ -843,21 +781,84 @@ zh-CN:
       title: 下载excel日报表
     xls_mth_download:
       title: 下载excel月报表
-  water_items:
+  students:
     index:
-      title: 供水设备列表  
+      title: 学生列表  
     new:
-      title: 新建供水设备
+      title: 新建学生
     create:
-      title: 新建供水设备
+      title: 新建学生
     edit:
-      title: 编辑供水设备
+      title: 编辑学生
     update:
-      title: 编辑供水设备
+      title: 编辑学生
     show:
-      title: 供水设备详情 
+      title: 学生详情 
     destroy:
-      title: 删除供水设备 
+      title: 删除学生 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询所有学生
+  advises:
+    index:
+      title: 说呗列表  
+    new:
+      title: 新建说呗
+    create:
+      title: 新建说呗
+    edit:
+      title: 编辑说呗
+    update:
+      title: 编辑说呗
+    show:
+      title: 说呗详情 
+    destroy:
+      title: 删除说呗 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询所有说呗
+  essays:
+    index:
+      title: 学习文章列表  
+    new:
+      title: 新建学习文章
+    create:
+      title: 新建学习文章
+    edit:
+      title: 编辑学习文章
+    update:
+      title: 编辑学习文章
+    show:
+      title: 学习文章详情 
+    destroy:
+      title: 删除学习文章 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询所有学习文章
+  papers:
+    index:
+      title: 试卷列表  
+    new:
+      title: 新建试卷
+    create:
+      title: 新建试卷
+    edit:
+      title: 编辑试卷
+    update:
+      title: 编辑试卷
+    show:
+      title: 试卷详情 
+    destroy:
+      title: 删除试卷 
     update_count:
       title: 更改数量 
     xls_download:
@@ -865,171 +866,109 @@ zh-CN:
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询所有供水设备
-  sewage_items:
+      title: ajax查询所有试卷
+  qaas:
     index:
-      title: 污水设备列表  
+      title: 问答题列表  
     new:
-      title: 新建污水设备
+      title: 新建问答题
     create:
-      title: 新建污水设备
+      title: 新建问答题
     edit:
-      title: 编辑污水设备
+      title: 编辑问答题
     update:
-      title: 编辑污水设备
+      title: 编辑问答题
     show:
-      title: 污水设备详情 
+      title: 问答题详情 
     destroy:
-      title: 删除污水设备 
+      title: 删除问答题 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+  tofs:
+    index:
+      title: 判断题列表  
+    new:
+      title: 新建判断题
+    create:
+      title: 新建判断题
+    edit:
+      title: 编辑判断题
+    update:
+      title: 编辑判断题
+    show:
+      title: 判断题详情 
+    destroy:
+      title: 删除判断题 
     update_count:
       title: 更改数量 
     xls_download:
       title: 下载模板 
     parse_excel:
       title: 上传excel数据 
-    query_all:
-      title: ajax查询所有污水设备
-  project_items:
+  mcqs:
     index:
-      title: 工程知识列表  
+      title: 多选题列表  
     new:
-      title: 新建工程知识
+      title: 新建多选题
     create:
-      title: 新建工程知识
+      title: 新建多选题
     edit:
-      title: 编辑工程知识
+      title: 编辑多选题
     update:
-      title: 编辑工程知识
+      title: 编辑多选题
     show:
-      title: 工程知识详情 
+      title: 多选题详情 
     destroy:
-      title: 删除工程知识 
-    update_count:
-      title: 更改数量 
+      title: 删除多选题 
     xls_download:
       title: 下载模板 
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询所有工程知识
-  repair_parts:
+      title: ajax查询多选题
+  singles:
     index:
-      title: 维修配件列表  
+      title: 单选题列表  
     new:
-      title: 新建维修配件
+      title: 新建单选题
     create:
-      title: 新建维修配件
+      title: 新建单选题
     edit:
-      title: 编辑维修配件
+      title: 编辑单选题
     update:
-      title: 编辑维修配件
+      title: 编辑单选题
     show:
-      title: 维修配件详情 
-    destroy:
-      title: 删除维修配件 
-    update_count:
-      title: 更改数量 
-    xls_download:
-      title: 下载模板 
-    parse_excel:
-      title: 上传excel数据 
-    query_all:
-      title: ajax查询所有维修配件
-  emergencies:
-    index:
-      title: 应急知识列表  
-    new:
-      title: 新建应急知识
-    create:
-      title: 新建应急知识
-    edit:
-      title: 编辑应急知识
-    update:
-      title: 编辑应急知识
-    show:
-      title: 应急知识详情 
-    destroy:
-      title: 删除应急知识 
-    update_count:
-      title: 更改数量 
-    xls_download:
-      title: 下载模板 
-    parse_excel:
-      title: 上传excel数据 
-    query_all:
-      title: ajax查询所有应急知识
-  stuffs:
-    index:
-      title: 化学菌剂列表  
-    new:
-      title: 新建化学菌剂
-    create:
-      title: 新建化学菌剂
-    edit:
-      title: 编辑化学菌剂
-    update:
-      title: 编辑化学菌剂
-    show:
-      title: 化学菌剂详情 
-    destroy:
-      title: 删除化学菌剂 
-    update_count:
-      title: 更改数量 
-    xls_download:
-      title: 下载模板 
-    parse_excel:
-      title: 上传excel数据 
-    query_all:
-      title: ajax查询化学菌剂
-  devices:
-    index:
-      title: 设备档案列表  
-    new:
-      title: 新建设备档案
-    create:
-      title: 新建设备档案
-    edit:
-      title: 编辑设备档案
-    update:
-      title: 编辑设备档案
-    show:
-      title: 设备档案详情 
+      title: 单选题详情 
     info:
-      title: 设备档案详情 
-    uphold:
-      title: 设备档案维保记录
+      title: 单选题详情 
     destroy:
-      title: 删除设备档案 
-    update_count:
-      title: 更改数量 
+      title: 删除单选题 
     xls_download:
       title: 下载模板 
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询设备档案
-  upholds:
+      title: ajax查询单选题
+  qes_banks:
     index:
-      title: 维保记录列表  
+      title: 题库列表  
     new:
-      title: 新建维保记录
+      title: 新建题库
     create:
-      title: 新建维保记录
+      title: 新建题库
     edit:
-      title: 编辑维保记录
+      title: 编辑题库
     update:
-      title: 编辑维保记录
+      title: 编辑题库
     show:
-      title: 维保记录详情 
+      title: 题库详情 
     destroy:
-      title: 删除维保记录 
-    update_count:
-      title: 更改数量 
+      title: 删除题库 
     xls_download:
       title: 下载模板 
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询维保记录
-    query_devices:
-      title: ajax查询所有设备
+      title: ajax查询题库

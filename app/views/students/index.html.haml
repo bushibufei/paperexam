@@ -13,8 +13,6 @@
           = link_to xls_download_factory_students_path(idencode(@factory.id)), :class => "button button-royal pull-right button-small mr-1" do
             下载表格模板
           
-
-          
           %button.button.button-caution.button-small.pull-right.mr-1{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
             上传表格
           
@@ -22,7 +20,7 @@
           -#
             = link_to "/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
               = fa_icon "plus", text: Setting.systems.btn_new, right: false 
-          %button.button.button-primary.button-small.pull-right.mr-1{"data-target" => "#newModal", "data-toggle" => "modal", :type => "button"}
+            %button.button.button-primary.button-small.pull-right.mr-1{"data-target" => "#newModal", "data-toggle" => "modal", :type => "button"}
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid
@@ -36,7 +34,7 @@
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
                   
-                    %th{:scope => "col", :'data-field' => "idno"}
+                    %th{:scope => "col", :'data-field' => "fct"}
                       公司
 
                     %th{:scope => "col", :'data-field' => "name"}
@@ -57,13 +55,13 @@
                         = student[:name]
                       %td
                         = student[:idno]
-                      -#
-                        %td
+                      %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_student_path(idencode(student.id)), :class => "button button-royal button-small mr-1" 
-                            = link_to "查看",  student_path(idencode(student.id)), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  student_path(idencode(student.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            = link_to "删除",  factory_student_path(student[:fct_id], student[:id]), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            -#
+                              = link_to "编辑", edit_factory_student_path(student[:fct_id], student[:id]), :class => "button button-royal button-small mr-1" 
+                              = link_to "查看",  student_path(idencode(student.id)), :class => "button button-primary button-small mr-1" 
             -#
               .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
                 = paginate @students, window: 2, left: 1, right: 1 

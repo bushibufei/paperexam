@@ -1,6 +1,6 @@
 $(".advises").ready(function() {
   if ($(".advises.index").length > 0) {
-    get_advises('advises');
+    //get_advises('advises');
   }
 });
 

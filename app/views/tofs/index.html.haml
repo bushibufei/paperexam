@@ -15,7 +15,8 @@
           %button.button.button-caution.button-small.pull-right.mr-1{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
             上传模板
 
-          = link_to "/qes_banks/#{idencode(@qes_bank.id)}/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
+          -#
+            = link_to "/qes_banks/#{idencode(@qes_bank.id)}/#{controller_name}/new", :class => "button  button-small pull-right button-primary mr-1" do
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid
@@ -34,7 +35,8 @@
                         %p
                           = index+1
                           = tof.title
-                          = link_to "编辑", edit_qes_bank_tof_path(idencode(@qes_bank.id), idencode(tof.id)), :class => "mr-1" 
+                          -#
+                            = link_to "编辑", edit_qes_bank_tof_path(idencode(@qes_bank.id), idencode(tof.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_tof_path(idencode(@qes_bank.id), idencode(tof.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
                         %p
                           - if tof.answer

@@ -6,10 +6,7 @@ class AdvisesController < ApplicationController
 
    
   def index
-    @advise = Advise.new
-   
-    #@advises = current_user.advises.page( params[:page]).per( Setting.systems.per_page )
-   
+    @advises = Advise.all.page( params[:page]).per( Setting.systems.per_page )
   end
    
 

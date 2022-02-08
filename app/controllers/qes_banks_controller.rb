@@ -80,7 +80,7 @@ class QesBanksController < ApplicationController
     @qes_bank = QesBank.find(iddecode(params[:id]))
    
     if @qes_bank.update(qes_bank_params)
-      redirect_to qes_bank_path(idencode(@qes_bank.id)) 
+      redirect_to edit_qes_bank_path(idencode(@qes_bank.id)) 
     else
       render :edit
     end

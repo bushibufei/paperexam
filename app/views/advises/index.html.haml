@@ -17,7 +17,9 @@
         .container-fluid
           .row
             .col-md-12
-              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+              -#
+                %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
                 %thead
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
@@ -30,7 +32,6 @@
                       -#
                         = Setting.advises.title
                     %th{:scope => "col", :'data-field' => "button"}
-              -#
                 %tbody
                   - @advises.each_with_index do |advise, index|
                     %tr
@@ -38,23 +39,25 @@
                         = index+1
                     
                       %td
-                        = advise.title
+                        = advise.content[0, 20]
                       %td
-                        = advise.content
+                        = advise.user.factories.first.name + '-' + advise.user.name
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_advise_path(idencode(advise.id)), :class => "button button-royal button-small mr-1" 
                             = link_to "查看",  advise_path(idencode(advise.id)), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  advise_path(idencode(advise.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
-            -#
-              .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
-                = paginate @advises, window: 2, left: 1, right: 1 
+                            - if current_user.has_role?(Setting.roles.role_grp)
+                              = link_to "删除",  advise_path(idencode(advise.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            -#
+                              = link_to "编辑", edit_advise_path(idencode(advise.id)), :class => "button button-royal button-small mr-1" 
+            .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
+              = paginate @advises, window: 2, left: 1, right: 1 
       = render "layouts/bootstrap/card"
 
 
 
-#newModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newModalLabel", :tabindex => "-1"}
+-#
+  #newModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newModalLabel", :tabindex => "-1"}
   .modal-dialog.modal-xl.modal-dialog-centered
     .modal-content
       .modal-header

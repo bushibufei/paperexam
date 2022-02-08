@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
     exclude_users = [Setting.admins.phone, "15763703188", "1239988"]
     users = @factory.users.where(['phone not in (?)', exclude_users])
     users.each do |user|
-      @students << {:name => user.name, :idno => user.phone, :fct => user.factories.first.name} 
+      @students << {:name => user.name, :idno => user.phone, :fct => @factory.name, :id => idencode(user.id), :fct_id => idencode(@factory.id)} 
     end
   end
 
@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
    
 
   def query_all 
-    items = Student.all
+    items = User.all
    
     obj = []
     items.each do |item|
@@ -44,72 +44,29 @@ class StudentsController < ApplicationController
     end
   end
 
-
-
-   
-  def show
-   
-    @student = Student.where(:user => current_user, :id => iddecode(params[:id])).first
-   
-  end
-   
-
-   
-  def new
-    @student = Student.new
-    
-  end
-   
-
-   
-  def create
-    @student = Student.new(student_params)
-     
-    @student.user = current_user
-     
-    if @student.save
-      redirect_to :action => :index
-    else
-      render :new
-    end
-  end
-   
-
-   
   def edit
-   
-    @student = Student.where(:user => current_user, :id => iddecode(params[:id])).first
-   
+    @factory = my_factory
+    @student = @factory.users.where(:id => iddecode(params[:id])).first
   end
-   
-
    
   def update
-   
-    @student = Student.where(:user => current_user, :id => iddecode(params[:id])).first
+    @factory = my_factory
+    @student = @factory.users.where(:id => iddecode(params[:id])).first
    
     if @student.update(student_params)
-      redirect_to student_path(idencode(@student.id)) 
+      redirect_to edit_factory_student_path(idencode(@factory.id), idencode(@student.id)) 
     else
       render :edit
     end
   end
    
-
-   
   def destroy
-   
-    @student = Student.where(:user => current_user, :id => iddecode(params[:id])).first
+    @factory = my_factory
+    @student = @factory.users.where(:id => iddecode(params[:id])).first
    
     @student.destroy
     redirect_to :action => :index
   end
-   
-
-  
-
-  
-
   
   def xls_download
     send_file File.join(Rails.root, "templates", "users.xlsx"), :filename => "学生信息模板.xlsx", :type => "application/force-download", :x_sendfile=>true
