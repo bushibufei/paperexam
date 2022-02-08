@@ -99,7 +99,7 @@ user.factories << all_factories
 #grp_opt = User.create!(:phone => "15763703588", :password => "swjt3588", :password_confirmation => "swjt3588", :name => "水务集团运营", :roles => @grp_opt, :factories => all_factories)
 
 #集团管理
-grp_mgn = User.create!(:phone => "1236688", :password => "swjt6688", :password_confirmation => "swjt6688", :name => "水务集团管理者", :roles => @grp_mgn, :factories => all_factories)
+grp_mgn = User.create!(:phone => "1239988", :password => "sdgykg9988", :password_confirmation => "sdgykg9988", :name => "水务集团管理者", :roles => @grp_mgn, :factories => all_factories)
 
 
 

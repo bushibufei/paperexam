@@ -124,7 +124,7 @@ defaults:
     poundage: 0.1
     commision: 0.1
     authc_pay: 1
-    host: 'http://192.168.100.119'
+    host: http://192.168.100.119
     status_en_yes: true
     status_en_no: false
     status_yes: 是
@@ -533,6 +533,10 @@ development:
     dept: 部门
     article_date: 日期
     content: 文章内容
+  advises:
+    label: 说呗
+    title: 标题
+    content: 内容
 test:
   notices: *1
   reports: *2

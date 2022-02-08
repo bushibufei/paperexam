@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :user_fcts, :dependent => :destroy
   has_many :factories, :through => :user_fcts
   has_many :error_logs, :dependent => :destroy
+  has_many :advises, :dependent => :destroy
 
 
   has_many :user_depts, :dependent => :destroy

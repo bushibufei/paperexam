@@ -36,6 +36,9 @@
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
                   
+                    %th{:scope => "col", :'data-field' => "idno"}
+                      公司
+
                     %th{:scope => "col", :'data-field' => "name"}
                       = Setting.students.name
                   
@@ -48,7 +51,8 @@
                     %tr
                       %td{:scope => "row"}
                         = index+1
-                    
+                      %td
+                        = student[:fct]
                       %td
                         = student[:name]
                       %td

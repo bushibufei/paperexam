@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'controls#index'
+  root :to => 'qes_banks#index'
 
   #mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -95,6 +95,9 @@ Rails.application.routes.draw do
       get :xls_download, :on => :collection
     end
   end
+  resources :students, :only => [] do
+    get :all, :on => :collection
+  end
 
   resources :wx_users, :only => [] do
     post :get_userid, :on => :collection
@@ -141,6 +144,10 @@ Rails.application.routes.draw do
     get :download_append, :on => :member
     get :query_all, :on => :collection
     get :query_show, :on => :member
+  end
+  resources :advises do
+    post :create_advise, :on => :collection
+    get :query_all, :on => :collection
   end
   resources :flower
 

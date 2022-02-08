@@ -7,10 +7,19 @@ class StudentsController < ApplicationController
   def index
     @factory = my_factory
     @students = [] 
-    exclude_users = [Setting.admins.phone, "15763703188", "1236688"]
+    exclude_users = [Setting.admins.phone, "15763703188", "1239988"]
     users = @factory.users.where(['phone not in (?)', exclude_users])
     users.each do |user|
-      @students << {:name => user.name, :idno => user.phone} 
+      @students << {:name => user.name, :idno => user.phone, :fct => user.factories.first.name} 
+    end
+  end
+
+  def all 
+    @students = [] 
+    exclude_users = [Setting.admins.phone, "15763703188", "1239988"]
+    users = User.where(['phone not in (?)', exclude_users]).all
+    users.each do |user|
+      @students << {:name => user.name, :idno => user.phone, :fct => user.factories.first.name} 
     end
   end
    

@@ -12,21 +12,14 @@
       - content_for :card_body do
         .container-fluid
           .row
-            .col-sm-12
-              %h2.text-center
-                = image_tag "gykg.jpg"
-                = @essay.title
             .col-md-8.offset-2.p-5.border
               .card.border-0.mb-3.rounded-0
                 .card-header.bg-transparent.border-dark
                   %h5
-                    = @essay.dept
-                    = @essay.article_date
+                    = image_tag "gykg.jpg"
+                    = @advise.user.factories.first.name + '-' + @advise.user.name
                 .card-body
-                  = @essay.content.html_safe
-                    
-              .row
-                .col-md-6
-                  = image_tag @essay.photo_url, :class => "w-100"
+                  = @advise.content
+              
               
       = render "layouts/bootstrap/card"
