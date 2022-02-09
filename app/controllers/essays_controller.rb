@@ -8,7 +8,7 @@ class EssaysController < ApplicationController
    
   def index
    
-    @essays = Essay.all.page( params[:page]).per( Setting.systems.per_page )
+    @essays = Essay.order('article_date DESC').all.page( params[:page]).per( Setting.systems.per_page )
    
   end
    
