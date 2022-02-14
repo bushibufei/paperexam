@@ -45,7 +45,7 @@ class ParseMcq
       flag = false
       hash_arr = []
       opt_arr.each do |opt|
-        opts = /([ABCDEFGH])(\p{P}*)([^ABCDEFGH]+)/.match(opt.upcase)
+        opts = /([ABCDEFGH])(\p{P}*)(.+)/.match(opt.upcase)
         ans = opts[1]
         if opts[3].nil?
           break

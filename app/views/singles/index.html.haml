@@ -34,14 +34,14 @@
                       %td
                         %p
                           = index+1
-                          = single.title
+                          = single.title.html_safe
                           -#
                             = link_to "编辑", edit_qes_bank_single_path(idencode(@qes_bank.id), idencode(single.id)), :class => "mr-1" 
                           = link_to "删除", qes_bank_single_path(idencode(@qes_bank.id), idencode(single.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}
                         %p
                           - single.single_options.each do |option|
                             %span.mr-2{:class => option.answer ? 'text-danger' : ''}
-                              = option.title
+                              = option.title.html_safe
               -#
                 = link_to , qes_bank_single_path(idencode(@qes_bank.id), idencode(single.id)), :class => 'text-dark' 
                 .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
