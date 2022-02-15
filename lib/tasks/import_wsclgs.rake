@@ -16,15 +16,17 @@ namespace 'db' do
         file_name = File.basename(xls, '.xlsx')
         creek = Creek::Book.new(xls) 
 
+        file_names = file_name.gsub(/\d/, '').split('$')
+
         creek.sheets.each_with_index do |sheet, index| 
           sheet_name = sheet.name
           matchs = /([^单多]*)((?:单|多))/.match(sheet_name)
-          title = file_name + matchs[1]
+          title = file_names[1] + matchs[1]
           qestype = matchs[2]
 
           qes_bank_id = nil 
           if qesbank_hash[title].nil?
-            qes_bank = QesBank.create(:name => title)
+            qes_bank = QesBank.create(:name => title, :editor => file_names[0])
             qes_bank_id = qes_bank.id
             qesbank_hash[title] = qes_bank_id
           else
@@ -43,7 +45,7 @@ namespace 'db' do
 
               q_answer = c_last.upcase.scan(/[ABCDEFG]/) 
 
-              puts title + '  ' + q_title
+              #puts title + '  ' + q_title
               if qestype[0] == '单'
                 @single = Single.create!(:qes_bank_id => qes_bank_id, :title => q_title)
                 values[1..-2].each do |option|
@@ -56,7 +58,7 @@ namespace 'db' do
               elsif qestype[0] == '多'
                 @mcq = Mcq.create!(:qes_bank_id => qes_bank_id, :title => q_title)
                 values[1..-2].each do |option|
-                  puts option
+                  #puts option
                   opt = /([ABCDEFG])(\p{P}*)(.+)/.match(option.upcase)
                   option_ans = opt[1] 
                   option_title = opt[3]

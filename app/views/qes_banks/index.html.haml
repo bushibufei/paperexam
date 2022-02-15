@@ -27,9 +27,10 @@
                     %th{:scope => "col", :'data-field' => "name"}
                       = Setting.qes_banks.name
                   
-                    -#
-                      %th{:scope => "col", :'data-field' => "editor"}
-                      = Setting.qes_banks.editor
+                    %th{:scope => "col", :'data-field' => "editor"}
+                      科目
+                      -#
+                        = Setting.qes_banks.editor
                   
                     %th{:scope => "col", :'data-field' => "single_count"}
                       = Setting.qes_banks.single_count
@@ -52,8 +53,7 @@
                     
                       %td
                         = qes_bank.name
-                      -#
-                        %td
+                      %td
                         = qes_bank.editor
                       %td
                         = qes_bank.singles.count

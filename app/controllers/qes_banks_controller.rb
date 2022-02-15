@@ -1,6 +1,6 @@
 class QesBanksController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!, :except => [:query_all]
+  before_filter :authenticate_user!, :except => [:query_all, :query_lib_all]
   #authorize_resource
 
    
@@ -13,22 +13,25 @@ class QesBanksController < ApplicationController
    
 
   def query_all 
-    items = QesBank.all
+    #items = QesBank.all
+    
+    items = QesBank.select('editor').uniq
    
     obj = []
     items.each do |item|
       obj << {
         :id => idencode(item.id),
+        :name => item.editor,
        
-        :name => item.name,
+        #:name => item.name,
        
-        :single_count => item.single_count,
+        #:single_count => item.single_count,
        
-        :mcq_count => item.mcq_count,
+        #:mcq_count => item.mcq_count,
        
-        :tof_count => item.tof_count,
+        #:tof_count => item.tof_count,
        
-        :qaa_count => item.qaa_count
+        #:qaa_count => item.qaa_count
       
       }
     end
@@ -37,7 +40,20 @@ class QesBanksController < ApplicationController
     end
   end
 
-
+  def query_lib_all 
+    items = QesBank.where(:editor => params[:qes_lib_name])
+   
+    obj = []
+    items.each do |item|
+      obj << {
+        :id => idencode(item.id),
+        :name => item.name,
+      }
+    end
+    respond_to do |f|
+      f.json{ render :json => obj.to_json}
+    end
+  end
 
    
   def show

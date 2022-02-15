@@ -116,6 +116,7 @@ Rails.application.routes.draw do
   end
   resources :qes_banks do
     get :query_all, :on => :collection
+    get :query_lib_all, :on => :collection
     resources :singles do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection

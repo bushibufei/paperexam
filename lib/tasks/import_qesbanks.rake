@@ -23,7 +23,7 @@ def exec_import_qesbanks
 
       qes_bank_id = nil 
       if qesbank_hash[qesname].nil?
-        qes_bank = QesBank.create(:name => '中级注安' + qesname)
+        qes_bank = QesBank.create(:name => qesname, :editor => '中级注安')
         qes_bank_id = qes_bank.id
         qesbank_hash[qesname] = qes_bank_id
       else
@@ -36,13 +36,13 @@ def exec_import_qesbanks
       qesLists.each do |qesList|
         qesList['topic_list'].each do |item|
           answer  = item['answer_option']
-          title   = item['content'].html_safe
+          title   = gsub_html(item['content'])
           options = item['option_list']
 
           if qestype[0] == '单选题'
             @single = Single.create!(:qes_bank_id => qes_bank_id, :title => title)
             options.each do |option|
-              option_title = option['content'].html_safe
+              option_title = gsub_html(option['content'])
               option_seq = option['seq']
               flag = answer.include?(option_seq)
               SingleOption.create(:title => option_title, :single => @single, :answer => flag)
@@ -51,7 +51,7 @@ def exec_import_qesbanks
             ansmtch = answer.scan(/[ABCDEFGH]/) 
             @mcq = Mcq.create!(:qes_bank_id => qes_bank_id, :title => title)
             options.each do |option|
-              option_title = option['content'].html_safe
+              option_title = gsub_html(option['content'])
               option_seq = option['seq']
               if ansmtch.include?(option_seq)
                 flag = true
@@ -69,4 +69,22 @@ def exec_import_qesbanks
     end
   end
 
+end
+
+def gsub_html(str)
+  str = str.gsub(/&amp;quot;/, '"');
+  str = str.gsub(/&amp;amp;/, '&');
+  str = str.gsub(/&amp;lt;/, '<');
+  str = str.gsub(/&amp;gt;/, '>');
+
+  str = str.gsub(/&quot;/, '"');
+  str = str.gsub(/&amp;/, '&');
+  str = str.gsub(/&lt;/, '<');
+  str = str.gsub(/&gt;/, '>');
+  str = str.gsub(/&nbsp;/, ' ');
+
+  str = str.gsub(/<p>/, '');
+  str = str.gsub(/<\/p>/, '');
+
+  str
 end
