@@ -116,6 +116,18 @@ class ApplicationController < ActionController::Base
       hash
     end
 
+    def wxuser_exist?
+      wxuser = WxUser.find_by(:openid => params[:id])
+      flag = wxuser ? true : false
+      unless flag
+        respond_to do |f|
+          f.json{ render :json => {:state => "error"}.to_json}
+        end
+        return
+      end
+    end
+
+
     def my_factory
       @factory = current_user.factories.find(iddecode(params[:factory_id]))
     end

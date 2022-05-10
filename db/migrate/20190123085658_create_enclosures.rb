@@ -10,6 +10,7 @@ class CreateEnclosures < ActiveRecord::Migration
       t.references :ocr
       t.references :dog
       t.references :single
+      t.references :notice
     end
   end
 end

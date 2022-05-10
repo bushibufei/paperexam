@@ -21,45 +21,52 @@
               .col-md-12
               = hidden_field_tag "fct", idencode(@factory.id), :class => "fct-val"
             .col-md-12
-              -#
-                %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-pagination"=>"true", :'data-page-size' => "25", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
-              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
+              %table#item-table.text-center.table-sm{:'data-toggle' => "table", :'data-id-table'=>"advancedTable", :"data-search" => "true", :'data-advanced-search'=>"true", :'data-virtual-scroll' => false }
                 %thead
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
-                  
-                    %th{:scope => "col", :'data-field' => "notice_date"}
-                      = Setting.notices.notice_date
+
+                    %th{:scope => "col", :'data-field' => "law_ctg"} 
+                      = Setting.law_ctgs.label
                   
                     %th{:scope => "col", :'data-field' => "title"}
-                      = Setting.notices.title
+                      = Setting.laws.title
                   
-                    -#
-                      %th{:scope => "col", :'data-field' => "content"}
-                      = Setting.notices.content
+                    %th{:scope => "col", :'data-field' => "pdt_date"}
+                      = Setting.laws.pdt_date
+                  
+                  
+                    %th{:scope => "col", :'data-field' => "dept"}
+                      = Setting.laws.dept
+                  
+                    %th{:scope => "col", :'data-field' => "ctg"}
+                      = Setting.laws.ctg
                   
                     %th{:scope => "col", :'data-field' => "button"}
                 %tbody
-                  - @notices.each_with_index do |notice, index|
+                  - @laws.each_with_index do |law, index|
                     %tr
                       %td{:scope => "row"}
                         = index+1
                     
                       %td
-                        = notice.notice_date
+                        = law.law_ctg.name
                       %td
-                        = notice.title
-                      -#
-                        %td
-                        = notice.content
+                        = law.title
+                      %td
+                        = law.pdt_date
+                      %td
+                        = law.dept
+                      %td
+                        = law.ctg
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_notice_path(idencode(notice.id)), :class => "button button-royal button-small mr-1" 
-                            = link_to "查看",  notice_path(idencode(notice.id)), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  notice_path(idencode(notice.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
-            .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
-              = paginate @notices, window: 2, left: 1, right: 1 
+                            = link_to "编辑", edit_law_path(idencode(law.id)), :class => "button button-royal button-small mr-1" 
+                            = link_to "查看",  law_path(idencode(law.id)), :class => "button button-primary button-small mr-1" 
+                            = link_to "删除",  law_path(idencode(law.id)), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+              .col-md-12.site-theme-paginate-wrapper.d-flex.justify-content-center.mt-3
+                = paginate @laws, window: 2, left: 1, right: 1 
       = render "layouts/bootstrap/card"
 
 
@@ -72,7 +79,7 @@
         -#
           = image_tag "gykg.jpg"
           %h5.text-success
-            = Setting.notices.label
+            = Setting.laws.label
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} x 
       .modal-body

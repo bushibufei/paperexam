@@ -17,5 +17,7 @@ class QesBank < ActiveRecord::Base
   has_many :qaas, :dependent => :destroy
   accepts_nested_attributes_for :qaas, reject_if: :all_blank, allow_destroy: true
 
+  belongs_to :learn_ctg
+
 
 end

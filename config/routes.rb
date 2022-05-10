@@ -98,11 +98,6 @@ Rails.application.routes.draw do
   resources :students, :only => [] do
     get :all, :on => :collection
   end
-
-  resources :wx_users, :only => [] do
-    post :get_userid, :on => :collection
-  end
-  
   #resources :departments do
   #  get :download_append, :on => :member
   #  post :parse_excel, :on => :collection
@@ -148,6 +143,57 @@ Rails.application.routes.draw do
   end
   resources :advises do
     post :create_advise, :on => :collection
+    get :query_all, :on => :collection
+  end
+  resources :notices do
+    get :download_attachment, :on => :member
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :learn_ctgs do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :wx_learnctgs do
+    get :query_all, :on => :collection
+    get :qes_bank, :on => :collection
+  end
+
+  resources :wx_users, only: [:update] do
+    collection do
+      post 'get_userid'
+      get 'fcts'
+      get 'status'
+      post 'set_fct'
+    end
+  end
+  
+  resources :wx_notices do
+    collection do
+      get 'query_latest'
+      get 'query_show'
+    end
+  end
+  resources :wx_qesbanks do
+    collection do
+      get 'query_all'
+      get 'query_lib_all'
+    end
+  end
+  resources :wx_lawctgs do
+    collection do
+      get 'query_all'
+      get 'qes_bank'
+      get 'query_show'
+    end
+    get :download_append, :on => :member
+  end
+  resources :law_ctgs do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :laws do
+    get :download_append, :on => :member
     get :query_all, :on => :collection
   end
   resources :flower

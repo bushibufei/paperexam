@@ -5,6 +5,7 @@ class CreateAttachments < ActiveRecord::Migration
 
       t.string :file,  null: false, default: ""
       t.references :dog
+      t.references :notice
     end
   end
 end

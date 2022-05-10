@@ -3,6 +3,7 @@ mysetting:
   notices: &1
     label: 通知公告
     title: 标题
+    notice_date: 日期
     content: 内容
   reports: &2
     title: 标题
@@ -153,6 +154,8 @@ defaults:
     pending: 待审核
     rejected: 不通过
     passed: 通过
+    txt: 文本 
+    pdf: PDF 
   states: &15
     opening: opening
     selecting: selecting
@@ -164,6 +167,9 @@ defaults:
     ongoing: ongoing
     outbound: outbound
     awaiting: awaiting
+    pending: pending
+    passed: passed
+    working: working
   trade_orders: &16
     number: 订单编号
     price: 价格
@@ -537,6 +543,19 @@ development:
     label: 说呗
     title: 标题
     content: 内容
+  learn_ctgs:
+    label: 学习在线分类
+    name: 名称
+  law_ctgs:
+    label: 法律制度类目
+    name: 名称
+  laws:
+    label: 法律法规
+    title: 标题
+    pdt_date: 日期
+    content: 内容
+    dept: 部门
+    ctg: 类别
 test:
   notices: *1
   reports: *2

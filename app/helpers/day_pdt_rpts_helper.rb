@@ -17,6 +17,52 @@ module DayPdtRptsHelper
 
     raw(str)
   end
+  
+  def options_for_learn_ctg(learn_ctgs, qes)
+    str = ""
+    learn_ctgs.each do |f|
+      selected = qes.id.nil? || qes.learn_ctg.nil? ? '' : qes.learn_ctg.id
+      
+      if f.id == selected
+        str += "<option selected='selected' value='" + idencode(f.id).to_s + "'>" + f.name + "</option>"
+      else
+        str += "<option value='" + idencode(f.id).to_s + "'>" + f.name + "</option>"
+      end
+    end
+
+    raw(str)
+  end
+
+  def options_for_law_ctg(law_ctgs, law)
+    str = ""
+    law_ctgs.each do |f|
+      selected = law.id.nil? || law.law_ctg.nil? ? '' : law.law_ctg.id
+      
+      if f.id == selected
+        str += "<option selected='selected' value='" + idencode(f.id).to_s + "'>" + f.name + "</option>"
+      else
+        str += "<option value='" + idencode(f.id).to_s + "'>" + f.name + "</option>"
+      end
+    end
+
+    raw(str)
+  end
+
+  def options_for_law_type(law)
+    str = ""
+    arr = [Setting.systems.pdf, Setting.systems.txt]
+    arr.each do |f|
+      selected = law.id.nil? ? '' : law.ctg
+      
+      if f == selected
+        str += "<option selected='selected' value='" + f + "'>" + f + "</option>"
+      else
+        str += "<option value='" + f + "'>" + f + "</option>"
+      end
+    end
+
+    raw(str)
+  end
 
   def options_for_quotas
     str = ""

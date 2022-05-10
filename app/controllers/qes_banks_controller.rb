@@ -6,54 +6,14 @@ class QesBanksController < ApplicationController
    
   def index
     @qes_bank = QesBank.new
+
+    @learn_ctgs = LearnCtg.all
    
     @qes_banks = QesBank.all.page( params[:page]).per( Setting.systems.per_page )
    
   end
    
 
-  def query_all 
-    #items = QesBank.all
-    
-    items = QesBank.select('editor').uniq
-   
-    obj = []
-    items.each do |item|
-      obj << {
-        :id => idencode(item.id),
-        :name => item.editor,
-       
-        #:name => item.name,
-       
-        #:single_count => item.single_count,
-       
-        #:mcq_count => item.mcq_count,
-       
-        #:tof_count => item.tof_count,
-       
-        #:qaa_count => item.qaa_count
-      
-      }
-    end
-    respond_to do |f|
-      f.json{ render :json => obj.to_json}
-    end
-  end
-
-  def query_lib_all 
-    items = QesBank.where(:editor => params[:qes_lib_name])
-   
-    obj = []
-    items.each do |item|
-      obj << {
-        :id => idencode(item.id),
-        :name => item.name,
-      }
-    end
-    respond_to do |f|
-      f.json{ render :json => obj.to_json}
-    end
-  end
 
    
   def show
@@ -72,7 +32,9 @@ class QesBanksController < ApplicationController
 
    
   def create
+    @learn_ctg = LearnCtg.find(iddecode(params[:learn_ctg]))
     @qes_bank = QesBank.new(qes_bank_params)
+    @qes_bank.learn_ctg = @learn_ctg
      
     if @qes_bank.save
       redirect_to :action => :index
@@ -84,16 +46,17 @@ class QesBanksController < ApplicationController
 
    
   def edit
+    @learn_ctgs = LearnCtg.all
    
     @qes_bank = QesBank.find(iddecode(params[:id]))
-   
   end
    
 
    
   def update
-   
+    @learn_ctg = LearnCtg.find(iddecode(params[:learn_ctg]))
     @qes_bank = QesBank.find(iddecode(params[:id]))
+    @qes_bank.learn_ctg = @learn_ctg
    
     if @qes_bank.update(qes_bank_params)
       redirect_to edit_qes_bank_path(idencode(@qes_bank.id)) 

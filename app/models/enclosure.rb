@@ -5,6 +5,7 @@ class Enclosure < ActiveRecord::Base
   belongs_to :article
   belongs_to :ocr
   belongs_to :single
+  belongs_to :notice
 end
 
 

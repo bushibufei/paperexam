@@ -101,6 +101,15 @@ user.factories << all_factories
 #集团管理
 grp_mgn = User.create!(:phone => "1239988", :password => "sdgykg9988", :password_confirmation => "sdgykg9988", :name => "水务集团管理者", :roles => @grp_mgn, :factories => all_factories)
 
+LearnCtg.create!(:name => '法律法规')
+LearnCtg.create!(:name => '地方法规')
+LearnCtg.create!(:name => '注安')
+LearnCtg.create!(:name => '技术')
+
+LawCtg.create!(:name => '法律')
+LawCtg.create!(:name => '标准')
+LawCtg.create!(:name => '制度')
+LawCtg.create!(:name => '规范')
 
 
 #Factory.all.each do |f|

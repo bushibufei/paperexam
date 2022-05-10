@@ -19,6 +19,7 @@ class CreateQesBanks < ActiveRecord::Migration
       t.string :photo,  null: false, default: Setting.systems.default_str
     
 
+      t.references :learn_ctg
     
 
     

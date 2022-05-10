@@ -19,47 +19,23 @@
               .card.border-0.mb-3.rounded-0
                 .card-header.bg-transparent.border-dark
                   %h5
-                    = Setting.notices.label
+                    = Setting.learn_ctgs.label
                 .card-body
                   %table.table-bordered.day-pdt-table.w-100.mb-3
                     %tbody
                     
                       %tr
                         %td.p-2.text-center
-                          = Setting.notices.title
+                          = Setting.learn_ctgs.name
                         %td.p-2.text-center
-                          = @notice.title
-                    
-                      
-                        %td.p-2.text-center
-                          = Setting.notices.notice_date
-                        %td.p-2.text-center
-                          = @notice.notice_date
-                    
-                      
-                        %td.p-2.text-center
-                          = Setting.notices.content
-                        %td.p-2.text-center
-                          = @notice.content
+                          = @learn_ctg.name
                     
               .row
               
-                .col-md-6
-                  = image_tag @notice.avatar_url, :class => "w-100"
+              .row
               
               .row
               
-                - @notice.enclosures.each do |e|
-                  .col-md-6
-                    = image_tag e.file_url(:small_width), :class => "w-100"
-              
-              .row
-              
-              
-              .row
-                - @notice.attachments.each_with_index do |e, i|
-                  .col-md-12
-                    = link_to File.basename(URI.decode(e.file_url)), download_attachment_notice_path(idencode(@notice.id), :number => i, :ft => '')
               
               
       = render "layouts/bootstrap/card"

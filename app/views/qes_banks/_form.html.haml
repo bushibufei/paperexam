@@ -28,19 +28,20 @@
                     
                     %tr
                       %td.p-2.text-center
-                        = f.label Setting.qes_banks.name, :class => "text-center"
-                      %td.p-2.text-center
-                        = f.text_field :name, :class => "form-control" , :required => true
-                      
-                    
-                    
+                        = f.label '学习在线分类', :class => "text-center"
+                      %td.p-2.text-center{:colspan => 3}
+                        = select_tag "learn_ctg", options_for_learn_ctg(@learn_ctgs, @qes_bank), :include_blank=>false, :class=>"form-control"   
+                    %tr
                       %td.p-2.text-center
                         = f.label '科目', :class => "text-center"
                       %td.p-2.text-center
                         = f.text_field :editor, :class => "form-control" 
+
+                      %td.p-2.text-center
+                        = f.label Setting.qes_banks.name, :class => "text-center"
+                      %td.p-2.text-center
+                        = f.text_field :name, :class => "form-control" , :required => true
                       
-                    
-                    
                     -#
                       %td.p-2.text-center
                         = f.label Setting.qes_banks.single_count, :class => "text-center"

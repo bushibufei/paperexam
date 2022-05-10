@@ -23,14 +23,17 @@
                 %thead
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
-                  
-                    %th{:scope => "col", :'data-field' => "name"}
-                      = Setting.qes_banks.name
+
+                    %th{:scope => "col", :'data-field' => "learn"} 
+                      = Setting.learn_ctgs.label
                   
                     %th{:scope => "col", :'data-field' => "editor"}
                       科目
                       -#
                         = Setting.qes_banks.editor
+                    %th{:scope => "col", :'data-field' => "name"}
+                      = Setting.qes_banks.name
+                  
                   
                     %th{:scope => "col", :'data-field' => "single_count"}
                       = Setting.qes_banks.single_count
@@ -52,9 +55,12 @@
                         = index+1
                     
                       %td
-                        = qes_bank.name
+                        - unless qes_bank.learn_ctg.nil?
+                          = qes_bank.learn_ctg.name
                       %td
                         = qes_bank.editor
+                      %td
+                        = qes_bank.name
                       %td
                         = qes_bank.singles.count
                       %td
