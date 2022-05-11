@@ -91,7 +91,7 @@ class McqsController < ApplicationController
   end
    
   def xls_download
-    send_file File.join(Rails.root, "templates", "问答题模板.txt"), :filename => "问答题模板.txt", :type => "application/force-download", :x_sendfile=>true
+    send_file File.join(Rails.root, "templates", "多选题模板.xlsx"), :filename => "多选题模板.xlsx", :type => "application/force-download", :x_sendfile=>true
   end
   
   

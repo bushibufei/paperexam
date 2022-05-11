@@ -20,6 +20,8 @@ class CreateQesBanks < ActiveRecord::Migration
     
 
       t.references :learn_ctg
+
+      t.references :user
     
 
     

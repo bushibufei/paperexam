@@ -54,9 +54,9 @@
     .modal-content
       .modal-header
         %h5#exampleModalLabel.modal-title
-          题库上传 
+          多选题上传 
           %span.text-danger
-            上传txt格式文件
+            上传xlsx格式文件
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} x 
       .modal-body
@@ -68,7 +68,7 @@
               %label.newbutton.button.button-primary.w-100
                 %p.append-url
                   选择文件
-                = file_field_tag "excel_file", :required => true , accept: 'text/plain', :class => "select-file", :onchange => "readFileName(this);"
+                = file_field_tag "excel_file", :required => true , accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :class => "select-file", :onchange => "readFileName(this);"
           .form-group.row
             .col-sm-12
               .progress.ctn-progress

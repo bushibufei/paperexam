@@ -19,5 +19,7 @@ class QesBank < ActiveRecord::Base
 
   belongs_to :learn_ctg
 
+  belongs_to :user
+
 
 end

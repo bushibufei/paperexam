@@ -10,6 +10,33 @@ class ParseTof
   end
 
   def process(qes_bank, file)
+    xls = file.path
+    creek = Creek::Book.new(xls) 
+
+    creek.sheets.each_with_index do |sheet, index| 
+      sheet.with_images.rows.each do |row|
+        content = row.reject { |key,value| value.to_s.blank? }
+        if !content.blank?
+          values = content.values
+          c_first = values.first.strip
+          c_last = values.last.strip
+
+          title_mch = /(\d+\p{P})?(.+)/.match(c_first)
+          q_title = title_mch[2]
+
+          answer = nil 
+          if c_last == '对'
+            answer = true
+          else
+            answer = false
+          end
+          Tof.create!(:qes_bank => qes_bank, :title => q_title, :answer => answer)
+        end
+      end
+    end
+  end
+
+  def process_txt(qes_bank, file)
     contents = File.read(file.path)
     ctns = contents.split(/\r\n/)
     ctns.each do |ctn|

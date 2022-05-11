@@ -94,7 +94,7 @@ class SinglesController < ApplicationController
   end
    
   def xls_download
-    send_file File.join(Rails.root, "templates", "单选题模板.txt"), :filename => "单选题模板.txt", :type => "application/force-download", :x_sendfile=>true
+    send_file File.join(Rails.root, "templates", "单选题模板.xlsx"), :filename => "单选题模板.xlsx", :type => "application/force-download", :x_sendfile=>true
   end
   
   

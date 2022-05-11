@@ -10,6 +10,42 @@ class ParseMcq
   end
 
   def process(qes_bank, file)
+    xls = file.path
+    creek = Creek::Book.new(xls) 
+
+    creek.sheets.each_with_index do |sheet, index| 
+      sheet.with_images.rows.each do |row|
+        content = row.reject { |key,value| value.to_s.blank? }
+        if !content.blank?
+          values = content.values
+          c_first = values.first
+          c_last = values.last
+
+          title_mch = /(\d+\p{P})?(.+)/.match(c_first)
+          q_title = title_mch[2]
+
+          q_answer = c_last.upcase.scan(/[ABCDEFG]/) 
+
+          @mcq = Mcq.create!(:qes_bank => qes_bank, :title => q_title)
+          values[1..-2].each do |option|
+            opt = /([ABCDEFG])(\p{P}*)(.+)/.match(option.upcase)
+            option_ans = opt[1] 
+            option_title = opt[3]
+            flag = q_answer.include?(option_ans)
+
+            if flag 
+              McqOption.create(:title => option_title, :mcq => @mcq, :answer => flag, :sequence => q_answer.index(option_ans) + 1)
+            else
+              McqOption.create(:title => option_title, :mcq => @mcq)
+            end
+          end
+        end
+      end
+    end
+  end
+
+  #txt版本的模板时用的解析函数
+  def process_txt(qes_bank, file)
     contents = File.read(file.path)
     ctns = contents.split('#$#')
     ctns.each do |ctn|

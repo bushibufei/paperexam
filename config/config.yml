@@ -544,7 +544,7 @@ development:
     title: 标题
     content: 内容
   learn_ctgs:
-    label: 学习在线分类
+    label: 在线答题分类
     name: 名称
   law_ctgs:
     label: 法律制度类目
