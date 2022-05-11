@@ -12,11 +12,8 @@ class CreateAdvises < ActiveRecord::Migration
     
 
     
-      t.references :user
+      t.references :wx_user
     
-
-    
-      t.references :user
     
       t.timestamps null: false
     end

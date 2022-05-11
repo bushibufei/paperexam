@@ -1,12 +1,11 @@
 class AdvisesController < ApplicationController
   layout "application_control"
-  skip_before_action :verify_authenticity_token, :only => [:create_advise]
-  before_filter :authenticate_user!, :except => [:create_advise]
-  #authorize_resource
+  before_filter :authenticate_user!
+  authorize_resource
 
    
   def index
-    @advises = Advise.all.page( params[:page]).per( Setting.systems.per_page )
+    @advises = Advise.order('created_at DESC').all.page( params[:page]).per( Setting.systems.per_page )
   end
    
 
@@ -47,24 +46,6 @@ class AdvisesController < ApplicationController
   end
    
 
-  def create_advise
-    openid = params[:openid] 
-    content = params[:text] 
-    user = User.find_by_number(openid)
-
-    @advise = Advise.new(:content => content, :user => user)
-     
-    if @advise.save
-      respond_to do |f|
-        f.json{ render :json => {:status => 'success'}.to_json}
-      end
-    else
-      respond_to do |f|
-        f.json{ render :json => {:status => 'error'}.to_json}
-      end
-    end
-  end
-   
   def create
     @advise = Advise.new(advise_params)
      

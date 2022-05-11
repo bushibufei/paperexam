@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root :to => 'advises#index'
+  root :to => 'qes_banks#index'
 
   #mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get 'forget', to: 'admin/dashboard#index'
+  #get 'forget', to: 'admin/dashboard#index'
   #devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_scope :user do
@@ -61,13 +61,6 @@ Rails.application.routes.draw do
   #  post :analyze, :on => :collection
   #end
 
-  resources :notices
-  resources :articles do
-    get :export, :on => :collection
-    get :main_image, :on => :member
-    get :detail_image, :on => :member
-  end
-
   #resources :systems, :only => [] do
   #  get :send_confirm_code, :on => :collection
   #end
@@ -82,27 +75,36 @@ Rails.application.routes.draw do
   #  get :invite, :on => :collection
   #end
 
-  resources :spiders do
-    get :start, :on => :member
-  end
+  #resources :spiders do
+  #  get :start, :on => :member
+  #end
 
   resources :selectors
  
-  resources :factories, :only => [:edit, :update] do
-    get :bigscreen, :on => :member
-    resources :students do
-      post :parse_excel, :on => :collection
-      get :xls_download, :on => :collection
-    end
-  end
-  resources :students, :only => [] do
-    get :all, :on => :collection
-  end
+  #resources :factories, :only => [] do
+  #  #get :bigscreen, :on => :member
+  #  #resources :students do
+  #  #  post :parse_excel, :on => :collection
+  #  #  get :xls_download, :on => :collection
+  #  #end
+  #end
   #resources :departments do
   #  get :download_append, :on => :member
   #  post :parse_excel, :on => :collection
   #  get :xls_download, :on => :collection
   #end
+  #resources :error_logs, :only => [:index] do
+  #  get :download, :on => :member
+  #end
+  #resources :articles do
+  #  get :export, :on => :collection
+  #  get :main_image, :on => :member
+  #  get :detail_image, :on => :member
+  #end
+
+  resources :students, :only => [] do
+    get :all, :on => :collection
+  end
   resources :papers do
     get :download_append, :on => :member
     get :download_paper, :on => :member
@@ -112,37 +114,31 @@ Rails.application.routes.draw do
   resources :qes_banks do
     get :query_all, :on => :collection
     get :query_lib_all, :on => :collection
-    resources :singles do
+    resources :singles, :only => [:index, :destroy]  do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection
-      get :query_all, :on => :collection
     end
-    resources :mcqs do
+    resources :mcqs, :only => [:index, :destroy]  do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection
-      get :query_all, :on => :collection
     end
-    resources :tofs do
+    resources :tofs, :only => [:index, :destroy]  do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection
-      get :query_all, :on => :collection
     end
-    resources :qaas do
+    resources :qaas, :only => [:index, :destroy]  do
       post :parse_excel, :on => :collection
       get :xls_download, :on => :collection
-      get :query_all, :on => :collection
     end
-  end
-  resources :error_logs, :only => [:index] do
-    get :download, :on => :member
   end
   resources :essays do
     get :download_append, :on => :member
-    get :query_all, :on => :collection
-    get :query_show, :on => :member
   end
-  resources :advises do
-    post :create_advise, :on => :collection
+  resources :laws do
+    get :download_append, :on => :member
+    get :query_all, :on => :collection
+  end
+  resources :advises, :only => [:index, :show, :destroy] do
     get :query_all, :on => :collection
   end
   resources :notices do
@@ -151,10 +147,20 @@ Rails.application.routes.draw do
     get :query_all, :on => :collection
   end
   resources :learn_ctgs do
-    get :download_append, :on => :member
     get :query_all, :on => :collection
   end
-  resources :wx_learnctgs do
+  resources :law_ctgs do
+    get :query_all, :on => :collection
+  end
+
+  resources :wx_essays, :only => [] do
+    get :query_all, :on => :collection
+    get :query_show, :on => :collection
+  end
+  resources :wx_advises, :only => []  do
+    post :create_advise, :on => :collection
+  end
+  resources :wx_learnctgs, :only => []  do
     get :query_all, :on => :collection
     get :qes_bank, :on => :collection
   end
@@ -168,19 +174,23 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :wx_notices do
+  resources :wx_notices, :only => []  do
     collection do
       get 'query_latest'
       get 'query_show'
     end
   end
-  resources :wx_qesbanks do
+  resources :wx_qesbanks, :only => []  do
     collection do
       get 'query_all'
+      get 'single_query_all'
+      get 'mcq_query_all'
+      get 'tof_query_all'
+      get 'qaa_query_all'
       get 'query_lib_all'
     end
   end
-  resources :wx_lawctgs do
+  resources :wx_lawctgs, :only => []  do
     collection do
       get 'query_all'
       get 'qes_bank'
@@ -188,14 +198,7 @@ Rails.application.routes.draw do
     end
     get :download_append, :on => :member
   end
-  resources :law_ctgs do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
-  resources :laws do
-    get :download_append, :on => :member
-    get :query_all, :on => :collection
-  end
+
   resources :flower
 
 end

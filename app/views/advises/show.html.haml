@@ -17,7 +17,8 @@
                 .card-header.bg-transparent.border-dark
                   %h5
                     = image_tag "gykg.jpg"
-                    = @advise.user.factories.first.name + '-' + @advise.user.name
+                    - if @advise.wx_user.factory
+                      = @advise.wx_user.factory.name + '-' + @advise.wx_user.name
                 .card-body
                   = @advise.content
               

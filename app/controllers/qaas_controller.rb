@@ -1,34 +1,13 @@
 class QaasController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!, :except => [:query_all]
-  #authorize_resource
+  before_filter :authenticate_user!
+  authorize_resource
 
   def index
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
     @qaas = @qes_bank.qaas
   end
    
-  def query_all 
-    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.qaas.all.shuffle
-   
-    obj = []
-    items.each_with_index do |item, number|
-      number = (number + 1).to_s + '、'
-      obj << {
-        :type => '3',
-        :title => number + item.title,
-        :options => [],
-        :answer => item.answer
-      }
-    end
-    respond_to do |f|
-      f.json{ render :json => obj.to_json}
-    end
-  end
-
-
-
 
 
    

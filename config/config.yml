@@ -112,8 +112,13 @@ defaults:
     super_admin: 超级管理员
     role_fct: 厂区用户
     role_grp: 集团用户
-    role_student: 学生
-    role_device: 设备管理
+    role_qesbank: 题库管理
+    role_law: 法律制度 
+    role_learn: 在线学习 
+    role_notice: 通知公告 
+    role_advise: 意见反馈 
+    role_ctg: 分类管理 
+    role_student: 学生管理
   permissions: &13
     super_admin: 管理系统所有资源
     label: 权限管理
@@ -149,7 +154,7 @@ defaults:
     btn_show: 详情
     btn_delete: 删除
     btn_save: 保存
-    company_name: 山东公用水务集团E-Learning系统
+    company_name: 山东公用控股平安公用后台管理系统
     opening: 新用户
     pending: 待审核
     rejected: 不通过
@@ -533,6 +538,7 @@ development:
     label: 学生
     name: 姓名
     idno: 身份证号
+    phone: 电话
   essays:
     label: 学习文章
     title: 标题
@@ -540,7 +546,7 @@ development:
     article_date: 日期
     content: 文章内容
   advises:
-    label: 说呗
+    label: 意见反馈
     title: 标题
     content: 内容
   learn_ctgs:

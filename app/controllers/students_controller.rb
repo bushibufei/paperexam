@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
-  #authorize_resource
+  authorize_resource
 
    
   def index
@@ -15,6 +15,23 @@ class StudentsController < ApplicationController
   end
 
   def all 
+    @students = []
+    if current_user.has_role?(Setting.roles.role_grp)
+      users = WxUser.all
+      users.each do |user|
+        @students << {:name => user.name, :idno => user.phone, :fct => user.factory.name} 
+      end
+    else
+      @factory = current_user.factories.first 
+      users = @factory.wx_users 
+      users.each do |user|
+        @students << {:name => user.name, :idno => user.phone, :fct => @factory.name} 
+      end
+    end
+  end
+
+  #暂时不用
+  def all_user
     @students = [] 
     exclude_users = [Setting.admins.phone, "15763703188", "1239988"]
     users = User.where(['phone not in (?)', exclude_users]).all

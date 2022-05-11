@@ -1,12 +1,12 @@
 class NoticesController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
-  #authorize_resource
+  authorize_resource
 
    
   def index
    
-    @notices = Notice.all.page( params[:page]).per( Setting.systems.per_page )
+    @notices = Notice.order('notice_date DESC').all.page( params[:page]).per( Setting.systems.per_page )
    
   end
    

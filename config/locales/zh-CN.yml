@@ -20,15 +20,15 @@ zh-CN:
 
   layouts:
     application:
-      site_title: "山东公用水务集团E-Learning系统"
+      site_title: "山东公用控股平安公用后台管理系统"
     application_control:
-      site_title: "山东公用水务集团E-Learning系统"
+      site_title: "山东公用控股平安公用后台管理系统"
     application_mobile:
-      site_title: "山东公用水务集团E-Learning系统"
+      site_title: "山东公用控股平安公用后台管理系统"
     application_home:
-      site_title: "山东公用水务集团E-Learning系统"
+      site_title: "山东公用控股平安公用后台管理系统"
     application_no_header:
-      site_title: "山东公用水务集团E-Learning系统"
+      site_title: "山东公用控股平安公用后台管理系统"
   views:
       pagination:
         first: "首页"
@@ -226,7 +226,7 @@ zh-CN:
   trees:
     index:
       title:
-        山东公用水务集团E-Learning系统
+        山东公用控股平安公用后台管理系统
   pick_records:
     index:
       title:
@@ -784,6 +784,8 @@ zh-CN:
   students:
     index:
       title: 学生列表  
+    all:
+      title: 学生列表  
     new:
       title: 新建学生
     create:
@@ -804,25 +806,25 @@ zh-CN:
       title: ajax查询所有学生
   advises:
     index:
-      title: 说呗列表  
+      title: 意见反馈列表  
     new:
-      title: 新建说呗
+      title: 新建意见反馈
     create:
-      title: 新建说呗
+      title: 新建意见反馈
     edit:
-      title: 编辑说呗
+      title: 编辑意见反馈
     update:
-      title: 编辑说呗
+      title: 编辑意见反馈
     show:
-      title: 说呗详情 
+      title: 意见反馈详情 
     destroy:
-      title: 删除说呗 
+      title: 删除意见反馈 
     xls_download:
       title: 下载模板 
     parse_excel:
       title: 上传excel数据 
     query_all:
-      title: ajax查询所有说呗
+      title: ajax查询所有意见反馈
   essays:
     index:
       title: 学习文章列表  
@@ -972,3 +974,66 @@ zh-CN:
       title: 上传excel数据 
     query_all:
       title: ajax查询题库
+  laws:
+    index:
+      title: 法律制度列表  
+    new:
+      title: 新建法律制度
+    create:
+      title: 新建法律制度
+    edit:
+      title: 编辑法律制度
+    update:
+      title: 编辑法律制度
+    show:
+      title: 法律制度详情 
+    destroy:
+      title: 删除法律制度 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询法律制度
+  learn_ctgs:
+    index:
+      title: 在线答题分类列表  
+    new:
+      title: 新建在线答题分类
+    create:
+      title: 新建在线答题分类
+    edit:
+      title: 编辑在线答题分类
+    update:
+      title: 编辑在线答题分类
+    show:
+      title: 在线答题分类详情 
+    destroy:
+      title: 删除在线答题分类 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询在线答题分类
+  law_ctgs:
+    index:
+      title: 法律制度分类列表  
+    new:
+      title: 新建法律制度分类
+    create:
+      title: 新建法律制度分类
+    edit:
+      title: 编辑法律制度分类
+    update:
+      title: 编辑法律制度分类
+    show:
+      title: 法律制度分类详情 
+    destroy:
+      title: 删除法律制度分类 
+    xls_download:
+      title: 下载模板 
+    parse_excel:
+      title: 上传excel数据 
+    query_all:
+      title: ajax查询法律制度分类

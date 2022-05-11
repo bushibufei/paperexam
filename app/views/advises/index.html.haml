@@ -41,7 +41,8 @@
                       %td
                         = advise.content[0, 20]
                       %td
-                        = advise.user.factories.first.name + '-' + advise.user.name
+                        - if advise.wx_user.factory
+                          = advise.wx_user.factory.name + '-' + advise.wx_user.name
                       %td
                         .container-fluid
                           .row.justify-content-center

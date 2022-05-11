@@ -1,7 +1,7 @@
 class SinglesController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!, :except => [:query_all]
-  #authorize_resource
+  before_filter :authenticate_user!
+  authorize_resource
 
    
   def index
@@ -9,41 +9,6 @@ class SinglesController < ApplicationController
     @singles = @qes_bank.singles
   end
    
-
-  def query_all 
-    @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))
-    items = @qes_bank.singles.all.shuffle
-    tag_arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-   
-    obj = []
-    items.each_with_index do |item, number|
-      number = (number + 1).to_s + '、'
-      options = item.single_options.shuffle
-      option_arrs = []
-      answer = ''
-      options.each_with_index do |opt, index|
-        option_arrs << {
-          "id": index,
-          "value": tag_arr[index],
-          "content": tag_arr[index] + ' ' + opt.title,
-          "true_answer": opt.answer
-        }
-        answer = tag_arr[index] if opt.answer
-      end
-      obj << {
-        :type => '0',
-        :title => number + item.title,
-        :options => option_arrs,
-        :answer => answer
-      }
-    end
-    respond_to do |f|
-      f.json{ render :json => obj.to_json}
-    end
-  end
-
-
-
    
   def show
     @qes_bank = QesBank.find(iddecode(params[:qes_bank_id]))

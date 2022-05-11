@@ -33,14 +33,11 @@
                       %td.p-2.text-center
                         = f.label Setting.notices.notice_date, :class => "text-center"
                       %td.p-2.text-center
-                        = f.date_field :notice_date, :class => "form-control" , :value => Date.today, :required => true
+                        = f.date_field :notice_date, :class => "form-control" ,:required => true
                       
                     
                     %tr
-                    
-                      %td.p-2.text-center
-                        = f.label Setting.notices.content, :class => "text-center"
-                      %td.p-2.text-center{:colspan => '3'}
+                      %td.p-2.text-center{:colspan => '4'}
                         = f.kindeditor :content
                       
                     

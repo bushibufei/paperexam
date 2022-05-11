@@ -1,14 +1,5 @@
 class Advise < ActiveRecord::Base
 
-
-
-
-
-
-  belongs_to :user
-
-
-
-  belongs_to :user
+  belongs_to :wx_user
 
 end

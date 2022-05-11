@@ -19,6 +19,7 @@
 class WxUser < ActiveRecord::Base
   belongs_to :factory
 
+  has_many :advises
 
 
  STATESTR = %w(ongoing completed)

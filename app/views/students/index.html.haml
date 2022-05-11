@@ -43,7 +43,8 @@
                     %th{:scope => "col", :'data-field' => "idno"}
                       = Setting.students.idno
                   
-                    %th{:scope => "col", :'data-field' => "button"}
+                    -#
+                      %th{:scope => "col", :'data-field' => "button"}
                 %tbody
                   - @students.each_with_index do |student, index|
                     %tr
@@ -55,7 +56,8 @@
                         = student[:name]
                       %td
                         = student[:idno]
-                      %td
+                      -#
+                        %td
                         .container-fluid
                           .row.justify-content-center
                             = link_to "删除",  factory_student_path(student[:fct_id], student[:id]), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 

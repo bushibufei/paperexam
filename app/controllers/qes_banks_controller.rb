@@ -1,16 +1,18 @@
 class QesBanksController < ApplicationController
   layout "application_control"
-  before_filter :authenticate_user!, :except => [:query_all, :query_lib_all]
-  #authorize_resource
+  before_filter :authenticate_user!
+  authorize_resource
 
    
   def index
     @qes_bank = QesBank.new
-
     @learn_ctgs = LearnCtg.all
-   
-    @qes_banks = current_user.qes_banks.all.page( params[:page]).per( Setting.systems.per_page )
-   
+    @qes_banks = [] 
+    if current_user.has_role?(Setting.roles.role_grp)
+      @qes_banks = QesBank.order('created_at DESC').all.page( params[:page]).per( Setting.systems.per_page )
+    else
+      @qes_banks = current_user.qes_banks.order('created_at DESC').all.page( params[:page]).per( Setting.systems.per_page )
+    end
   end
    
 
@@ -18,7 +20,8 @@ class QesBanksController < ApplicationController
    
   def show
    
-    @qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    #@qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:id]))
    
   end
    
@@ -49,14 +52,16 @@ class QesBanksController < ApplicationController
   def edit
     @learn_ctgs = LearnCtg.all
    
-    @qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    #@qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:id]))
   end
    
 
    
   def update
     @learn_ctg = LearnCtg.find(iddecode(params[:learn_ctg]))
-    @qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    #@qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:id]))
     @qes_bank.learn_ctg = @learn_ctg
    
     if @qes_bank.update(qes_bank_params)
@@ -70,7 +75,8 @@ class QesBanksController < ApplicationController
    
   def destroy
    
-    @qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    #@qes_bank = current_user.qes_banks.find(iddecode(params[:id]))
+    @qes_bank = QesBank.find(iddecode(params[:id]))
    
     @qes_bank.destroy
     redirect_to :action => :index

@@ -13,6 +13,7 @@ class CreateLaws < ActiveRecord::Migration
       t.string :ctg,  null: false, default: Setting.systems.default_str
     
 
+      t.references :user
     
 
     

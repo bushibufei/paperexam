@@ -24,9 +24,10 @@
                       = Setting.students.name
                   
                     %th{:scope => "col", :'data-field' => "idno"}
-                      = Setting.students.idno
+                      = Setting.students.phone
                   
-                    %th{:scope => "col", :'data-field' => "button"}
+                    -#
+                      %th{:scope => "col", :'data-field' => "button"}
                 %tbody
                   - @students.each_with_index do |student, index|
                     %tr

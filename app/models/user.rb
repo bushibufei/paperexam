@@ -7,17 +7,15 @@ class User < ActiveRecord::Base
   has_many :consumes
   has_many :orders
   has_many :statistics
-  has_many :ware_houses
-  has_many :ctg_frsts
-  has_many :stocks
-  has_many :retrievals
   has_many :projects
+  has_many :laws
   has_many :qes_banks
+  has_many :advises
+  has_many :essays
 
   has_many :user_fcts, :dependent => :destroy
   has_many :factories, :through => :user_fcts
   has_many :error_logs, :dependent => :destroy
-  has_many :advises, :dependent => :destroy
 
 
   has_many :user_depts, :dependent => :destroy

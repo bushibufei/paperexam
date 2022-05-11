@@ -30,9 +30,10 @@ class WxLawctgsController < ApplicationController
         :id => idencode(item.id),
         :name => item.title,
         :ctg => item.ctg,
-        :attach => URI.decode(item.attch_url)
+        :attach => item.attch_url.nil? ? '' : URI.decode(item.attch_url)
       }
     end
+    puts obj 
     respond_to do |f|
       f.json{ render :json => {:title => law_ctg.name, :res => obj}.to_json}
     end

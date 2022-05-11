@@ -1,12 +1,15 @@
 class LawsController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
-  #authorize_resource
+  authorize_resource
 
    
   def index
-    @laws = Law.all.page( params[:page]).per( Setting.systems.per_page )
-   
+    if current_user.has_role?(Setting.roles.role_grp)
+      @laws = Law.order('pdt_date DESC').all.page( params[:page]).per( Setting.systems.per_page )
+    else
+      @laws = current_user.laws.order('pdt_date DESC').all.page( params[:page]).per( Setting.systems.per_page )
+    end
   end
    
 
@@ -59,6 +62,7 @@ class LawsController < ApplicationController
     @law_ctg = LawCtg.find(iddecode(params[:law_ctg]))
     @law = Law.new(law_params)
     @law.law_ctg = @law_ctg
+    @law.user = current_user
      
     if @law.save
       redirect_to :action => :index
@@ -127,6 +131,9 @@ class LawsController < ApplicationController
       params.require(:law).permit( :title, :pdt_date, :content, :dept, :ctg , :attch)
     end
   
+    def my_law 
+      @law = current_user.laws.find(iddecode(params[:id]))
+    end
   
   
 end

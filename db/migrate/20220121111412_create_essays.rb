@@ -15,6 +15,7 @@ class CreateEssays < ActiveRecord::Migration
       t.string :photo,  null: false, default: Setting.systems.default_str
     
 
+      t.references :user
     
 
     
