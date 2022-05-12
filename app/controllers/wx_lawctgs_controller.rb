@@ -1,5 +1,7 @@
 class WxLawctgsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :wxuser_exist?
+
 
   def query_all 
     items = LawCtg.all
@@ -33,7 +35,6 @@ class WxLawctgsController < ApplicationController
         :attach => item.attch_url.nil? ? '' : URI.decode(item.attch_url)
       }
     end
-    puts obj 
     respond_to do |f|
       f.json{ render :json => {:title => law_ctg.name, :res => obj}.to_json}
     end

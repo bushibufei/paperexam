@@ -1,5 +1,7 @@
 class WxAdvisesController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :wxuser_exist?
+
 
   def create_advise
     openid = params[:openid] 

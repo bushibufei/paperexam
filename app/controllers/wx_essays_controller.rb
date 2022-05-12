@@ -1,5 +1,7 @@
 class WxEssaysController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :wxuser_exist?
+
 
   def query_all 
     items = Essay.all.order('article_date DESC')

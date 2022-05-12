@@ -1,5 +1,6 @@
 class WxQesbanksController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :wxuser_exist?
 
   def query_all 
     #items = QesBank.all
