@@ -1,6 +1,6 @@
 class WxNoticesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :wxuser_exist?
+  #before_filter :wxuser_exist?
   def query_latest
     @notice = Notice.last
     if @notice
