@@ -29,20 +29,18 @@
                     %th{:scope => "col", :'data-field' => "law_ctg"} 
                       = Setting.law_ctgs.label
                   
-                    %th{:scope => "col", :'data-field' => "title"}
-                      = Setting.laws.title
-                  
                     %th{:scope => "col", :'data-field' => "pdt_date"}
                       = Setting.laws.pdt_date
                   
-                  
                     %th{:scope => "col", :'data-field' => "dept"}
                       = Setting.laws.dept
+
+                    %th{:scope => "col", :'data-field' => "title"}
+                      = Setting.laws.title
                   
-                    %th{:scope => "col", :'data-field' => "ctg"}
-                      文件
-                      -#
-                        = Setting.laws.ctg
+                    -#
+                      %th{:scope => "col", :'data-field' => "ctg"}
+                      = Setting.laws.ctg
                   
                     %th{:scope => "col", :'data-field' => "button"}
                 %tbody
@@ -54,18 +52,17 @@
                       %td
                         = law.law_ctg.name
                       %td
-                        = law.title
-                      %td
                         = law.pdt_date
                       %td
                         = law.dept
                       %td
-                        -#
-                          = law.ctg
                         - unless law.attch.blank?
-                          = link_to URI.decode(File.basename(law.attch_url)), download_append_law_path(idencode(law.id))
+                          = link_to law.title, download_append_law_path(idencode(law.id))
                         - else
-                          无
+                          = law.title
+                      -#
+                        %td
+                          = law.ctg
                       %td
                         .container-fluid
                           .row.justify-content-center
