@@ -72,13 +72,14 @@ class WxUsersController < ApplicationController
   end
 
   def status
+    objs = []
+    fcts = Factory.all
+    fcts.each do |fct|
+      objs << fct.name
+    end
     wxuser = WxUser.find_by(:openid => params[:id])
     respond_to do |f|
-      if wxuser.state == Setting.states.ongoing
-        f.json { render :json => {:status => Setting.states.ongoing }.to_json}
-      else
-        f.json { render :json => {:status => Setting.states.completed, :name => wxuser.name, :phone => wxuser.phone, :fct => wxuser.factory.name}.to_json}
-      end
+      f.json { render :json => {:name => wxuser.name, :phone => wxuser.phone, :fct => wxuser.factory.name, :fcts => objs}.to_json}
     end
   end
 

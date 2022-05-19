@@ -19,13 +19,18 @@ class StudentsController < ApplicationController
     if current_user.has_role?(Setting.roles.role_grp)
       users = WxUser.all
       users.each do |user|
-        @students << {:name => user.name, :idno => user.phone, :fct => user.factory.name} 
+        name = user.name || ''
+        phone = user.phone || ''
+        fct = user.factory.nil? ? '' : user.factory.name
+        @students << {:name => name, :idno => phone, :fct => fct} 
       end
     else
       @factory = current_user.factories.first 
       users = @factory.wx_users 
       users.each do |user|
-        @students << {:name => user.name, :idno => user.phone, :fct => @factory.name} 
+        name = user.name || ''
+        phone = user.phone || ''
+        @students << {:name => name, :idno => phone, :fct => @factory.name} 
       end
     end
   end
