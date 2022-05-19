@@ -50,7 +50,8 @@ module DayPdtRptsHelper
 
   def options_for_law_type(law)
     str = ""
-    arr = [Setting.systems.pdf, Setting.systems.txt]
+    #arr = [Setting.systems.pdf, Setting.systems.txt]
+    arr = [Setting.systems.pdf]
     arr.each do |f|
       selected = law.id.nil? ? '' : law.ctg
       
