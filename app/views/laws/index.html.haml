@@ -55,7 +55,7 @@
                         = law.pdt_date
                       %td
                         = law.dept
-                      %td
+                      %td.text-left
                         - unless law.attch.blank?
                           = link_to law.title, download_append_law_path(idencode(law.id))
                         - else

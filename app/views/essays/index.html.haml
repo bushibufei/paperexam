@@ -30,14 +30,14 @@
                   %tr
                     %th{:scope => "col", :'data-field' => "id"} #
                   
+                    %th{:scope => "col", :'data-field' => "article_date"}
+                      = Setting.essays.article_date
+                  
                     %th{:scope => "col", :'data-field' => "title"}
                       = Setting.essays.title
                   
                     %th{:scope => "col", :'data-field' => "dept"}
                       = Setting.essays.dept
-                  
-                    %th{:scope => "col", :'data-field' => "article_date"}
-                      = Setting.essays.article_date
                   
                     %th{:scope => "col", :'data-field' => "button"}
                 %tbody
@@ -47,11 +47,11 @@
                         = index+1
                     
                       %td
+                        = essay.article_date
+                      %td.text-left
                         = essay.title
                       %td
                         = essay.dept
-                      %td
-                        = essay.article_date
                       %td
                         .container-fluid
                           .row.justify-content-center
