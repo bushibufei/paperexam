@@ -61,7 +61,7 @@ class WxUsersController < ApplicationController
 
   def set_fct
     fct = Factory.find_by(:name => params[:fct])
-    wxuser = WxUser.find_by(:openid => params[:id])
+    wxuser = WxUser.find_by(:openid => params[:openid])
     respond_to do |f|
       if wxuser.update_attributes(:state => Setting.states.ongoing, :factory => fct, :name => params[:name], :phone => params[:phone] )
         f.json { render :json => {:status => "success" }.to_json}
@@ -77,9 +77,12 @@ class WxUsersController < ApplicationController
     fcts.each do |fct|
       objs << fct.name
     end
-    wxuser = WxUser.find_by(:openid => params[:id])
+    wxuser = WxUser.find_by(:openid => params[:openid])
     respond_to do |f|
-      f.json { render :json => {:name => wxuser.name, :phone => wxuser.phone, :fct => wxuser.factory.name, :fcts => objs}.to_json}
+      name = wxuser.name || ''
+      phone = wxuser.phone || ''
+      fct = wxuser.factory.nil? ? '' : wxuser.factory.name
+      f.json { render :json => {:name => name, :phone => phone, :fct => fct, :fcts => objs}.to_json}
     end
   end
 
