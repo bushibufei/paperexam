@@ -33,7 +33,13 @@ module Agate
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '/wx_advises/*', :headers => :any, :methods => [:post]
+        resource '/wx_essays/*', :headers => :any, :methods => [:get]
+        resource '/wx_learnctgs/*', :headers => :any, :methods => [:get]
+        resource '/wx_lawctgs/*', :headers => :any, :methods => [:get]
+        resource '/wx_notices/*', :headers => :any, :methods => [:get]
+        resource '/wx_qesbanks/*', :headers => :any, :methods => [:get]
+        resource '/wx_users/*', :headers => :any, :methods => [:get, :post, :put]
       end
     end
 

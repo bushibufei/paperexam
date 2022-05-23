@@ -1,14 +1,14 @@
 ---
-mysetting:
-  notices: &1
+mysetting: &mysetting
+  notices: 
     label: 通知公告
     title: 标题
     notice_date: 日期
     content: 内容
-  reports: &2
+  reports: 
     title: 标题
     content: 正文
-  models: &3
+  models: 
     label: ''
     name: 名称
     image: 图像
@@ -20,15 +20,15 @@ mysetting:
     js: js
     scss: scss
     admin: 添加到后台
-  properties: &4
+  properties: 
     label: 嵌套显示的属性
     name: 属性名
     tag: 标签
-  relates: &5
+  relates: 
     label: ''
     type: 关联类型
     obj: 对象
-  templates: &6
+  templates: 
     label: 模板
     name: 英文名称
     cn_name: 中文名称
@@ -48,13 +48,13 @@ mysetting:
     upload: 上传解析表格
     admin: 添加到后台
     current_user: current_user
-  natures: &7
+  natures: 
     label: ''
     name: 英文属性名
     type: 类型
     title: 中文属性名
     tag: 标签
-  spiders: &8
+  spiders: 
     label: 爬虫
     link: 请求地址
     cookie: cookie
@@ -65,7 +65,7 @@ mysetting:
     referer: referer
     host: host
     redirection: redirection
-  selectors: &9
+  selectors: 
     label: 选择器
     name: 选择器名称
     category: 类型
@@ -80,13 +80,13 @@ mysetting:
       img:
         info: 图片
         value: '2'
-defaults:
-  admins: &10
+defaults: &defaults
+  admins: 
     class_name: all
     email: myzn@world.com
     phone: '17305379588'
     password: dagening@521
-  users: &11
+  users: 
     class_name: User
     opening: 0
     pending: 1
@@ -105,7 +105,7 @@ defaults:
     status: 认证状态
     level: 等级
     inviter: 邀请者
-  roles: &12
+  roles: 
     label: 角色
     name: 名称
     class_name: Role
@@ -119,14 +119,14 @@ defaults:
     role_advise: 意见反馈 
     role_ctg: 分类管理 
     role_student: 学生管理
-  permissions: &13
+  permissions: 
     super_admin: 管理系统所有资源
     label: 权限管理
     name: 名称
     subject_class: controller单数名称
     action: action
     description: 描述
-  systems: &14
+  systems: 
     poundage: 0.1
     commision: 0.1
     authc_pay: 1
@@ -161,7 +161,7 @@ defaults:
     passed: 通过
     txt: 文本 
     pdf: PDF 
-  states: &15
+  states: 
     opening: opening
     selecting: selecting
     selected: selected
@@ -175,7 +175,7 @@ defaults:
     pending: pending
     passed: passed
     working: working
-  trade_orders: &16
+  trade_orders: 
     number: 订单编号
     price: 价格
     state: 状态
@@ -195,7 +195,7 @@ defaults:
     completed_title: 已完成
     canceled: canceled
     canceled_title: 已取消
-  extract_cashes: &17
+  extract_cashes: 
     coin: 提取金额
     status: 状态
     pending: pending
@@ -204,7 +204,7 @@ defaults:
     agree_title: 同意
     disagree: disagree
     disagree_title: 不同意
-  file_libs: &18
+  file_libs: 
     label: 文件库
     name: 文件名
     path: 路径
@@ -216,40 +216,40 @@ defaults:
     ppt: '4'
     mp4: '5'
     txt: '6'
-  archives: &19
+  archives: 
     label: 档案库
     name: 名称
     desc: 备注
-  portfolios: &20
+  portfolios: 
     label: 文件夹
     name: 文件夹名
-  examines: &21
+  examines: 
     label: 考核资料自选库
     name: 名称
-  exm_items: &22
+  exm_items: 
     label: 一级目录
     name: 一级目录名
     hierarchy: 目录树
-  agendas: &23
+  agendas: 
     label: 日程
     title: 标题
     content: 事务内容
     worktime: 时间
-  statistics: &24
+  statistics: 
     label: 统计
     title: 标题
     xtitle: x轴标题
     ytitle: y轴标题
     legend: 图例
     data: 数据
-  companies: &25
+  companies: 
     label: 公司
     area: 地区
     name: 名称
     info: 简介
     lnt: 经度
     lat: 维度
-  factories: &26
+  factories: 
     label: 工厂
     area: 地区
     name: 名称
@@ -258,11 +258,11 @@ defaults:
     lnt: 经度
     lat: 维度
     plan: 计划
-  departments: &27
+  departments: 
     label: 部门
     name: 名称
     info: 简介
-  charts: &28
+  charts: 
     line: '0'
     bar: '1'
     gauge: '2'
@@ -275,7 +275,7 @@ defaults:
     table_t: table
     radar_t: radar
     scatter_3d_t: scatter_3d
-  months: &29
+  months: 
     one: '1'
     one_t: 一月
     two: '2'
@@ -300,7 +300,7 @@ defaults:
     eleven_t: 十一月
     twelve: '12'
     twelve_t: 十二月
-  accounts: &30
+  accounts: 
     coin: 金额
     password: 安全密码
     number: 卡号
@@ -311,7 +311,7 @@ defaults:
     award_invite_recharge: 40
     enable: enable
     disable: disable
-  wares: &31
+  wares: 
     water_item: '0'
     sewage_item: '1'
     project_item: '2'
@@ -320,19 +320,19 @@ defaults:
     stuff: '5'
     device: '6'
     uphold: '7'
-  productions: &32
+  productions: 
     label: 生产设备
     name: 名称
-  waters: &33
+  waters: 
     label: 供水
     name: 名称
-  water_ones: &34
+  water_ones: 
     label: 供水一级分类
     name: 名称
-  water_twos: &35
+  water_twos: 
     label: 供水二级分类
     name: 名称
-  water_items: &36
+  water_items: 
     label: 供水设备
     name: 名称
     idno: 编码
@@ -341,16 +341,16 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 数量
-  sewages: &37
+  sewages: 
     label: 污水
     name: 名称
-  sewage_ones: &38
+  sewage_ones: 
     label: 污水一级分类
     name: 名称
-  sewage_twos: &39
+  sewage_twos: 
     label: 污水二级分类
     name: 名称
-  sewage_items: &40
+  sewage_items: 
     label: 污水设备
     name: 名称
     idno: 编码
@@ -359,16 +359,16 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 数量
-  projects: &41
+  projects: 
     label: 工程
     name: 名称
-  project_ones: &42
+  project_ones: 
     label: 工程一级分类
     name: 名称
-  project_twos: &43
+  project_twos: 
     label: 工程二级分类
     name: 名称
-  project_items: &44
+  project_items: 
     label: 工程知识
     name: 名称
     idno: 编码
@@ -377,7 +377,7 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 数量
-  repair_parts: &45
+  repair_parts: 
     label: 维修配件
     name: 名称
     idno: 编码
@@ -386,7 +386,7 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 数量
-  emergencies: &46
+  emergencies: 
     label: 应急知识
     name: 名称
     idno: 编码
@@ -395,7 +395,7 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 数量
-  stuffs: &47
+  stuffs: 
     label: 化学菌剂
     name: 名称
     idno: 编码
@@ -404,7 +404,7 @@ defaults:
     fct: 厂家
     desc: 备注
     count: 重量kg
-  devices: &48
+  devices: 
     label: 设备档案
     idno: 设备编号
     name: 设备名称
@@ -423,63 +423,13 @@ defaults:
     state_normal: 正常
     state_repair: 检修
     state_stop: 停用
-  upholds: &49
+  upholds: 
     label: 维保记录
     uphold_date: 日期
     reason: 维保原因
     content: 维保内容
     cost: 费用
     state: 状态
-development:
-  notices: *1
-  reports: *2
-  models: *3
-  properties: *4
-  relates: *5
-  templates: *6
-  natures: *7
-  spiders: *8
-  selectors: *9
-  admins: *10
-  users: *11
-  roles: *12
-  permissions: *13
-  systems: *14
-  states: *15
-  trade_orders: *16
-  extract_cashes: *17
-  file_libs: *18
-  archives: *19
-  portfolios: *20
-  examines: *21
-  exm_items: *22
-  agendas: *23
-  statistics: *24
-  companies: *25
-  factories: *26
-  departments: *27
-  charts: *28
-  months: *29
-  accounts: *30
-  wares: *31
-  productions: *32
-  waters: *33
-  water_ones: *34
-  water_twos: *35
-  water_items: *36
-  sewages: *37
-  sewage_ones: *38
-  sewage_twos: *39
-  sewage_items: *40
-  projects: *41
-  project_ones: *42
-  project_twos: *43
-  project_items: *44
-  repair_parts: *45
-  emergencies: *46
-  stuffs: *47
-  devices: *48
-  upholds: *49
   papers:
     label: 试卷
     name: 试卷名
@@ -562,103 +512,12 @@ development:
     content: 内容
     dept: 部门
     ctg: 类别
+development:
+  <<: *mysetting
+  <<: *defaults
 test:
-  notices: *1
-  reports: *2
-  models: *3
-  properties: *4
-  relates: *5
-  templates: *6
-  natures: *7
-  spiders: *8
-  selectors: *9
-  admins: *10
-  users: *11
-  roles: *12
-  permissions: *13
-  systems: *14
-  states: *15
-  trade_orders: *16
-  extract_cashes: *17
-  file_libs: *18
-  archives: *19
-  portfolios: *20
-  examines: *21
-  exm_items: *22
-  agendas: *23
-  statistics: *24
-  companies: *25
-  factories: *26
-  departments: *27
-  charts: *28
-  months: *29
-  accounts: *30
-  wares: *31
-  productions: *32
-  waters: *33
-  water_ones: *34
-  water_twos: *35
-  water_items: *36
-  sewages: *37
-  sewage_ones: *38
-  sewage_twos: *39
-  sewage_items: *40
-  projects: *41
-  project_ones: *42
-  project_twos: *43
-  project_items: *44
-  repair_parts: *45
-  emergencies: *46
-  stuffs: *47
-  devices: *48
-  upholds: *49
+  <<: *mysetting
+  <<: *defaults
 production:
-  notices: *1
-  reports: *2
-  models: *3
-  properties: *4
-  relates: *5
-  templates: *6
-  natures: *7
-  spiders: *8
-  selectors: *9
-  admins: *10
-  users: *11
-  roles: *12
-  permissions: *13
-  systems: *14
-  states: *15
-  trade_orders: *16
-  extract_cashes: *17
-  file_libs: *18
-  archives: *19
-  portfolios: *20
-  examines: *21
-  exm_items: *22
-  agendas: *23
-  statistics: *24
-  companies: *25
-  factories: *26
-  departments: *27
-  charts: *28
-  months: *29
-  accounts: *30
-  wares: *31
-  productions: *32
-  waters: *33
-  water_ones: *34
-  water_twos: *35
-  water_items: *36
-  sewages: *37
-  sewage_ones: *38
-  sewage_twos: *39
-  sewage_items: *40
-  projects: *41
-  project_ones: *42
-  project_twos: *43
-  project_items: *44
-  repair_parts: *45
-  emergencies: *46
-  stuffs: *47
-  devices: *48
-  upholds: *49
+  <<: *mysetting
+  <<: *defaults
