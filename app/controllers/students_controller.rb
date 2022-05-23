@@ -20,9 +20,10 @@ class StudentsController < ApplicationController
       users = WxUser.all
       users.each do |user|
         name = user.name || ''
+        nickname = user.nickname || ''
         phone = user.phone || ''
         fct = user.factory.nil? ? '' : user.factory.name
-        @students << {:name => name, :idno => phone, :fct => fct} 
+        @students << {:name => name, :nickname => nickname, :idno => phone, :fct => fct} 
       end
     else
       @factory = current_user.factories.first 
@@ -30,7 +31,7 @@ class StudentsController < ApplicationController
       users.each do |user|
         name = user.name || ''
         phone = user.phone || ''
-        @students << {:name => name, :idno => phone, :fct => @factory.name} 
+        @students << {:name => name, :nickname => nickname, :idno => phone, :fct => @factory.name} 
       end
     end
   end

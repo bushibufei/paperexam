@@ -22,6 +22,9 @@
                       公司
                     %th{:scope => "col", :'data-field' => "name"}
                       = Setting.students.name
+
+                    %th{:scope => "col", :'data-field' => "nickname"}
+                      = Setting.students.nickname
                   
                     %th{:scope => "col", :'data-field' => "idno"}
                       = Setting.students.phone
@@ -38,6 +41,8 @@
                     
                       %td
                         = student[:name]
+                      %td
+                        = student[:nickname]
                       %td
                         = student[:idno]
                       -#

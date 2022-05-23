@@ -487,6 +487,7 @@ defaults: &defaults
   students:
     label: 学生
     name: 姓名
+    nickname: 微信昵称 
     idno: 身份证号
     phone: 电话
   essays:
